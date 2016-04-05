@@ -9,9 +9,10 @@
 }
 
 .party_card {
-  width:30%;
+  width:400px;
   @include breakpoint(medium down) {
     width:50%;
+    max-width:180px;
   }
 
   float:left;

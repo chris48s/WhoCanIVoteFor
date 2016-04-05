@@ -15,7 +15,7 @@
   <div class="card">
     <h2 class="card_header">Your next election{{ posts.count|pluralize }}</h2>
     <h3>{{ elections.0.election_date }}</h3>
-    <p>Registered voters will be able to vote in {{ posts.count|apnumber }} election{{ posts.count|pluralize }}:</p>
+    <p>On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_date }}, registered voters will be able to vote in {{ posts.count|apnumber }} election{{ posts.count|pluralize }}:</p>
     <ul>
       {% for post in posts %}
         <li><a href="#election_{{ post.election.slug }}">{{ post.election }}</a></li>

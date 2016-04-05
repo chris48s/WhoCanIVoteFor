@@ -7649,12 +7649,13 @@ body > footer {
     width: 2000%; }
 
 .party_card {
-  width: 30%;
+  width: 400px;
   float: left;
   position: relative; }
   @media screen and (max-width: 63.9375em) {
     .party_card {
-      width: 50%; } }
+      width: 50%;
+      max-width: 180px; } }
 
 .candidate_card {
   background-color: #263238;
