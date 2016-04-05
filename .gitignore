@@ -63,3 +63,5 @@ target/
 wcivf/static/COMPILED/scss/main.css.map
 wcivf/settings/local.py
 wcivf/media/
+wcivf/assets/.sass-cache
+wcivf/static_root/
