@@ -44,18 +44,14 @@
 
       <div id="election_{{ post.election.slug }}" class="card" {# style="background-color:{{ post.election.ballot_colour }}" #}>
         <h2 class="card_header">{{ post.election.name }}</h2>
-        <div class="row">
-          <div class="columns large-6">
-            {{ post.election.description|markdown }}
-          </div>
-          <div class="columns large-6">
-            {% if post.election.voting_system %}
-            <h3>Voting system: {{ post.election.voting_system }}</h3>
-            {{ post.election.voting_system.description|markdown }}
-            <a href="{{ post.election.voting_system.wikipeida_url }}">Read more on wikipedia</a>
-            {% endif %}
-          </div>
-        </div>
+
+        {{ post.election.description|markdown }}
+
+        {% if post.election.voting_system %}
+        <h3>Voting system: {{ post.election.voting_system }}</h3>
+        {{ post.election.voting_system.description|markdown }}
+        <a href="{{ post.election.voting_system.wikipeida_url }}">Read more on wikipedia</a>
+        {% endif %}
 
 
         {% if post.people %}
