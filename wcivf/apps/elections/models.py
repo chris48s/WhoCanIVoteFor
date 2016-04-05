@@ -13,6 +13,8 @@ class Election(models.Model):
     election_type = models.CharField(blank=True, max_length=100)
     voting_system = models.ForeignKey('VotingSystem', null=True)
     uses_lists = models.BooleanField(default=False)
+    voter_age = models.CharField(blank=True, max_length=100)
+    voter_citizenship = models.TextField(blank=True)
 
     objects = ElectionManager()
 

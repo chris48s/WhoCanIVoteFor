@@ -1,11 +1,11 @@
-<h2 class="card_header">Notify me in future</h2>
+<h2 class="card_header">Get email alerts for future elections</h2>
 {% if postcode in request.session.notification_form_filed %}
   Thanks, you're signed up for notifications about future elections in {{ postcode }}!
 {% else %}
 <form method="post">
   {% csrf_token %}
   {{ notification_form.errors }}
-  <p>Get email notifications for every election in {{ postcode }}</p>
+  <p>We will email you when there is an election in this area.</p>
   <input type="hidden" value="{{ postcode }}" id="{{ notification_form.postcode.id_for_label }}" name="{{ notification_form.postcode.name }}">
   <label for="{{ form.message.id_for_label }}">Your email address:
     {{ notification_form.email }}
