@@ -9,7 +9,11 @@
 }
 
 .party_card {
-  width:200px;
+  width:30%;
+  @include breakpoint(medium down) {
+    width:50%;
+  }
+
   float:left;
   position:relative;
 }
