@@ -8,6 +8,7 @@ from django.core.cache import cache
 from notifications.forms import PostcodeNotificationForm
 
 from .models import Election, Post
+from people.models import PersonPost, Person
 
 class ElectionNotificationFormMixin(object):
     notification_form = PostcodeNotificationForm
@@ -35,6 +36,7 @@ class ElectionNotificationFormMixin(object):
                     return self.render_to_response(self.get_context_data())
         return super().post(request, *args, **kwargs)
 
+
 class PostcodeView(ElectionNotificationFormMixin, TemplateView):
     """
     This is the main view that takes a postcode and shows all elections
@@ -45,33 +47,6 @@ class PostcodeView(ElectionNotificationFormMixin, TemplateView):
     well.
     """
     template_name = 'elections/postcode_view.html'
-
-
-    # def postcode_to_elections(self):
-    #     all_elections = []
-    #     all_ids = self.kwargs.get('election_ids', '').split(',')
-    #     return Election.objects.filter(slug__in=all_ids)
-
-    def postcode_to_posts(self, postcode):
-        key = "upcoming_elections_{}".format(postcode)
-        results_json = cache.get(key)
-        if not results_json:
-            url = '{0}/upcoming-elections?postcode={1}'.format(
-                settings.YNR_BASE,
-                postcode
-            )
-            req = requests.get(url)
-            results_json = req.json()
-            cache.set(key, results_json)
-
-        all_posts = []
-        for election in results_json:
-            all_posts.append(election['post_slug'])
-        posts = Post.objects.filter(ynr_id__in=all_posts)
-        posts = posts.select_related('election')
-        posts = posts.prefetch_related('person_set')
-        return posts
-
 
     def get_polling_station_info(self, postcode):
         key = "pollingstations_{}".format(postcode)
@@ -95,18 +70,52 @@ class PostcodeView(ElectionNotificationFormMixin, TemplateView):
         cache.set(key, info)
         return info
 
+    def postcode_to_posts(self, postcode):
+        key = "upcoming_elections_{}".format(postcode)
+        results_json = cache.get(key)
+        if not results_json:
+            url = '{0}/upcoming-elections?postcode={1}'.format(
+                settings.YNR_BASE,
+                postcode
+            )
+            req = requests.get(url)
+            results_json = req.json()
+            cache.set(key, results_json)
 
+        all_posts = []
+        for election in results_json:
+            all_posts.append(election['post_slug'])
+
+        posts = Post.objects.filter(ynr_id__in=all_posts)
+        posts = posts.select_related('election')
+        posts = posts.select_related('election__voting_system')
+        posts = posts.order_by('election__uses_lists')
+        return posts
+
+    def posts_to_people(self, post):
+        people_for_post = PersonPost.objects.filter(post=post)
+        people_for_post = people_for_post.select_related('person')
+
+        if post.election.uses_lists:
+            order_by = ['person__party_name', 'list_position']
+        else:
+            order_by = ['person__name']
+
+        people_for_post = people_for_post.order_by(*order_by)
+
+        return people_for_post
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['postcode'] = kwargs['postcode']
         context['posts'] = self.postcode_to_posts(context['postcode'])
+        context['people_for_post'] = {}
+        for post in context['posts']:
+            post.people = self.posts_to_people(post)
+
         context['polling_station'] = self.get_polling_station_info(
             context['postcode'])
-        # context['next_elections'] = context['elections'].filter(
-        #     election_date=context['elections'][0].election_date)
-        #
-        #
+
         # #Always add the EU Ref for the time being
         # try:
         #     eu_ref = Election.objects.get(slug='ref.2016-06-23')

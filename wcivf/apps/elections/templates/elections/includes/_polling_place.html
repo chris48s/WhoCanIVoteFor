@@ -1,0 +1,16 @@
+<section id="polling_place" class="columns large-12">
+  <div class="card">
+    <h2>Where to vote</h2>
+    <p>In most cases you will need to visit your polling station in order to vote.</p>
+    {% if polling_station.polling_station_known %}
+    <p>Your polling station is <strong>{{ polling_station.polling_station.address }}</strong></p>
+    <p><a href="http://pollingstations.democracyclub.org.uk/postcode/{{ postcode }}">
+      Get walking directions from {{ postcode }}</a></p>
+    {% else %}
+    <p>You should get a "poll card" through the post telling you where to vote.</p>
+    <p>If you haven't got one, or aren't sure where to vote, you should call
+      {{ polling_station.council.name }} on <a href="tel:{{ polling_station.council.phone }}">
+        {{ polling_station.council.phone }}</a></p>
+    {% endif %}
+  </div>
+</section>

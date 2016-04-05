@@ -8,6 +8,7 @@ django-markdown-deux
 django-localflavor==1.2
 django-extensions==1.6.1
 django-redis
+pillow
 
 git+https://github.com/DemocracyClub/django-static-precompiler
 git+git://github.com/DemocracyClub/dc_base_theme.git

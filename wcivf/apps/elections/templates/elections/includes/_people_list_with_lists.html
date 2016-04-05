@@ -1,0 +1,16 @@
+{% regroup post.people by person.party_name as people_by_party %}
+
+{% for person_post in people_by_party %}
+      <div class="party_card">
+        <h4>{{ person_post.grouper }}</h4>
+        <p>{{ person_post.list|length }} list candidates</p>
+      </div>
+  <div class="party_list_row">
+    <div class="party_list_row_inner">
+      {% for person in person_post.list %}
+        {% include "elections/includes/_person_card.html" with person_post=person lists=True %}
+      {% endfor %}
+    </div>
+  </div>
+{% endfor %}
+

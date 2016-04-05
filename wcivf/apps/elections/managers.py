@@ -11,6 +11,7 @@ class ElectionManager(models.Manager):
                 'current': election['current'],
                 'description': election['description'],
                 'election_type': self.election_id_to_type(election['id']),
+                'uses_lists': election['party_lists_in_use'],
             }
         )
 

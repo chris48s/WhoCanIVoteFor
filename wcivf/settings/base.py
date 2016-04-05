@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'core',
     'notifications',
     'people',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -72,6 +73,9 @@ TEMPLATES = [
         },
     },
 ]
+
+MEDIA_ROOT = root('media')
+MEDIA_URL = "/media/"
 
 WSGI_APPLICATION = 'wcivf.wsgi.application'
 

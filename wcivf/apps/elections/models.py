@@ -12,6 +12,7 @@ class Election(models.Model):
     ballot_colour = models.CharField(blank=True, max_length=100)
     election_type = models.CharField(blank=True, max_length=100)
     voting_system = models.ForeignKey('VotingSystem', null=True)
+    uses_lists = models.BooleanField(default=False)
 
     objects = ElectionManager()
 

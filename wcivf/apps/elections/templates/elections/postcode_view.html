@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load markdown_deux_tags %}
+{% load static %}
 
 {% block content %}
 
@@ -11,9 +12,14 @@
 
 <section class="columns large-6">
   <div class="card">
-    <h2 class="card_header">Your Next Election:</h2>
+    <h2 class="card_header">Your Next Election{{ posts.count|pluralize }}:</h2>
     <h3>{{ elections.0.election_date }}</h3>
-    <p>Registered voters will be able to vote in {{ posts.count }} election{{ posts.count|pluralize }}.</p>
+    <p>Registered voters will be able to vote in {{ posts.count }} election{{ posts.count|pluralize }}:</p>
+    <ul>
+      {% for post in posts %}
+        <li><a href="#election_{{ post.election.slug }}">{{ post.election }}</a></li>
+      {% endfor %}
+    </ul>
     <p>This means you will need to visit your polling station and fill out {{ posts.count }} ballot paper{{ posts.count|pluralize }}.</p>
   </div>
 </section>
@@ -24,65 +30,56 @@
   </div>
 </section>
 
-
+{% if polling_station.polling_station_known %}
+{# Add this at the top of the page if it's known, or at the bottom if it's not #}
+{% include "elections/includes/_polling_place.html" %}
+{% endif %}
 
 <section id="elections_list" class="columns large-12">
-  <div class="card">
-    <h2>Where to vote</h2>
-    <p>In most cases you will need to visit your polling station in order to vote.</p>
-    {% if polling_station.polling_station_known %}
-    <p>Your polling station is <strong>{{ polling_station.polling_station.address }}</strong></p>
-    <p><a href="http://pollingstations.democracyclub.org.uk/postcode/{{ postcode }}">
-      Get walking directions from {{ postcode }}</a></p>
-    {% else %}
-    <p>You should get a "poll card" through the post telling you where to vote.</p>
-    <p>If you haven't got one, or aren't sure where to vote, you should call
-      {{ polling_station.council.name }} on <a href="tel:{{ polling_station.council.phone }}">
-        {{ polling_station.council.phone }}</a></p>
-    {% endif %}
+  <div class="">
+    {% regroup posts by election.election_date as elections_by_date %}
+    {% for election_group in elections_by_date %}
+      <h2>{{ election_group.grouper }}</h2>
+      {% for post in election_group.list %}
+
+      <div id="election_{{ post.election.slug }}" class="card" {# style="background-color:{{ post.election.ballot_colour }}" #}>
+        <h2 class="card_header">{{ post.election.name }}</h2>
+        <div class="row">
+          <div class="columns large-6">
+            {{ post.election.description|markdown }}
+          </div>
+          <div class="columns large-6">
+            {% if post.election.voting_system %}
+            <h3>Voting system: {{ post.election.voting_system }}</h3>
+            {{ post.election.voting_system.description|markdown }}
+            <a href="{{ post.election.voting_system.wikipeida_url }}">Read more on wikipedia</a>
+            {% endif %}
+          </div>
+        </div>
+
+
+        {% if post.people %}
+        <div class="clearfix row">
+          {% if post.election.uses_lists %}
+          <h3>List candidates by party</h3>
+          <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
+          {% include "elections/includes/_people_list_with_lists.html" %}
+          {% else %}
+          <h3>Candidates</h3>
+          {% include "elections/includes/_people_list.html" %}
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    {% endfor %}
   </div>
 </section>
 
-<section id="elections_list" class="columns large-12">
-  <h2>Upcoming elections:</h2>
+{% if not polling_station.polling_station_known %}
+{# Add this at the top of the page if it's known, or at the bottom if it's not #}
+{% include "elections/includes/_polling_place.html" %}
+{% endif %}
 
-  {% regroup posts by election.election_date as elections_by_date %}
-  {% for election_group in elections_by_date %}
-    <h2>{{ election_group.grouper }}</h2>
-    {% for post in election_group.list %}
-
-    <div id="election_{{ post.election.slug }}" class="card" style="background-color:{{ post.election.ballot_colour }}">
-      <h2 class="card_header">{{ post.election.name }}</h2>
-      <div class="row">
-        <div class="columns large-6">
-          <h3><date>{{ post.election.election_date }}</date></h3>
-          {{ post.election.description|markdown }}
-
-        </div>
-        <div class="columns large-6">
-          {% if post.election.voting_system %}
-          <h3>Voting system: {{ post.election.voting_system }}</h3>
-          {{ post.election.voting_system.description|markdown }}
-          <a href="{{ post.election.voting_system.wikipeida_url }}">Read more on wikipedia</a>
-          {% endif %}
-        </div>
-      </div>
-
-
-      {% if post.person_set.all %}
-      <div class="clearfix">
-        <h3>Candidates</h3>
-        {% for person in post.person_set.all %}
-          <li class="large-4 columns card">
-            {{ person.name }}<br>
-            {{ person.party_name }}
-          </li>
-        {% endfor %}
-      </div>
-      {% endif %}
-    </div>
-    {% endfor %}
-  {% endfor %}
-</section>
 
 {% endblock content %}

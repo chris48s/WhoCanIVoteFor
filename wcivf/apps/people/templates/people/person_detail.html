@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+<section class="columns large-12">
+  <div class="card">
+    <h2>
+      {% if object.photo %}
+      <img src="{% static object.photo.url %}" height="120px" width="120px">
+      {% endif %}
+      {{ object.name }}</h2>
+  </div>
+</section>
+
+<section class="columns large-12">
+  <div class="card">
+    <h3>Contact details</h3>
+    <dl>
+      {% if object.email %}
+      <dt>Email</dt>
+      <dd>{{ object.email }}</dd>
+      {% else %}
+      We don't know {{ object.name }}'s email address.
+      <a href="https://candidates.democracyclub.org.uk/person/{{ object.ynr_id }}">Can you add it?</a>
+      {% endif %}
+    </dl>
+  </div>
+</section>
+
+<section class="columns large-12">
+  <div class="card">
+    <h3>Elections</h3>
+    <p>{{ object.name }} has stood in the following elections:</p>
+    <ul>
+    {% for post in object.posts.all %}
+      <li><strong>{{ post.label }}</strong>: {{ post.election }}</li>
+
+    {% endfor %}
+    </ul>
+  </div>
+</section>
+
+
+
+
+{% endblock content %}
+

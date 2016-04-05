@@ -8,5 +8,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('core.urls')),
     url(r'^elections/', include('elections.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    url(r'^person/', include('people.urls')),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
++ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
