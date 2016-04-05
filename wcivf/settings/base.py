@@ -114,6 +114,7 @@ STATICFILES_DIRS = (
     root('assets'),
     root('static'),
 )
+STATIC_ROOT = root('static_root')
 
 # TODO find a way to move these in to the DC theme app?
 STATIC_PRECOMPILER_ROOT = root('static')
