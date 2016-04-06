@@ -7,5 +7,8 @@ urlpatterns = [
     url(r'^$', HomePageView.as_view(), name="home_view"),
     url(r'^privacy/$',
         TemplateView.as_view(template_name="privacy.html"),
-        name="privacy"),
+        name="privacy_view"),
+    url(r'^about/$',
+        TemplateView.as_view(template_name="about.html"),
+        name="about_view"),
 ]
