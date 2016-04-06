@@ -17,7 +17,9 @@
     {% block page_meta %}{% endblock page_meta %}
 {% endblock site_meta %}
 
-{% block extra_site_css %}{% if USE_COMPRESSED_CSS %}{% include "_compressed_css.html" %}{% else %}
+{% block extra_site_css %}{% if USE_COMPRESSED_CSS %}
+    <style type="text/css">{% include "_compressed_css.html" %}</style>
+{% else %}
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static "scss/main.scss"|compile %}" />{% endif %}
