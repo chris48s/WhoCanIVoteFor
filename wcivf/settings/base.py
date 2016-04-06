@@ -22,6 +22,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # Application definition
 
@@ -33,6 +34,8 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
+    'django.contrib.sites',
     'dc_theme',
     'static_precompiler',
     'elections',
