@@ -2,6 +2,11 @@
 
 {% load breadcrumb_tags %}
 
+{% block page_title %}{{ object.name }}{% endblock page_title %}
+{% block og_title %}{{ object.name }}{% endblock og_title %}
+{% block og_description %}The {{ object.name }} {% if object.in_past %}was{% else %}will be{% endif %} held on {{ object.election_date }}.{% endblock og_description %}
+
+
 {% block content %}
 
 <div class="card">

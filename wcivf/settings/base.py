@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'core',
     'notifications',
     'people',
-    'debug_toolbar',
+    # 'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -74,11 +74,13 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'dc_theme.context_processors.dc_theme_context',
                 'core.context_processors.canonical_url',
+                'core.context_processors.use_compress_css',
             ],
         },
     },
 ]
 
+USE_COMPRESSED_CSS = False
 MEDIA_ROOT = root('media')
 MEDIA_URL = "/media/"
 

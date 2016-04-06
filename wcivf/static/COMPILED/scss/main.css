@@ -11,7 +11,6 @@
  * 2. Prevent iOS and IE text size adjust after device orientation change,
  *    without disabling user zoom.
  */
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 html {
   font-family: sans-serif;
   /* 1 */

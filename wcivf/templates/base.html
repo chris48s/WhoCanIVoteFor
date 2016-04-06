@@ -2,12 +2,25 @@
 {% load compile_static %}
 {% load static %}
 
-{% block extra_site_css %}
-    <link rel="stylesheet" href="{% static "scss/main.scss"|compile %}" />
-{% endblock extra_site_css %}
+{% block base_title %}{% block page_title %}{% endblock page_title %} | WhoCanIVoteFor?{% endblock base_title %}
 
 {% block site_meta %}
+    <link rel="canonical" href="{{ CANONICAL_URL }}{{ request.path }}" />
+    <meta property="og:site_name" content="WhoCanIVoteFor?" />
+    <meta property="og:url" content="{{ CANONICAL_URL }}{{ request.path }}" />
+    <meta property="fb:app_id" content="262795130596272" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@democlub">
+    <meta property="og:image" content="{% block og_image %}{% static "dc_theme/images/logo-large.png" %}{% endblock og_image %}" />
+    <meta property="og:title" content="{% block og_title %}WhoCanIVoteFor?{% endblock og_title %}" />
+    <meta property="og:description" content="{% block og_description %}Find out about elections, candidate and polling stations with Democracy Club's WhoCanIVoteFor tool.{% endblock og_description %}" />
+    {% block page_meta %}{% endblock page_meta %}
+{% endblock site_meta %}
 
+{% block extra_site_css %}{% if USE_COMPRESSED_CSS %}{% include "_compressed_css.html" %}{% else %}
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "scss/main.scss"|compile %}" />{% endif %}
 {% comment %}
 <script type="application/ld+json">
 {
@@ -21,14 +34,13 @@
   }
 }
 </script>
-{% endcomment %}
+{% endcomment %}{% endblock extra_site_css %}
 
-{% endblock site_meta %}
+
+
 
 
 {% block site_footer %}
-<link href="//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
-
 <footer class="footer">
   <div class="row">
     <div class="small-12 medium-6 columns">

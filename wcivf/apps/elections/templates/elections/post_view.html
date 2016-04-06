@@ -2,14 +2,15 @@
 
 {% load breadcrumb_tags %}
 
+{% block page_title %}{{ object.label }}{% endblock page_title %}
+{% block og_title %}{{ object.label }}{% endblock og_title %}
+{% block og_description %}'{{ object.label }}' is a post in the {{ object.election.name }} election{% endblock og_description %}
+
 {% block content %}
 
 <div class="card">
 
-
 <h1>{{ object.label }}</h1>
-
-
 
 <p>"{{ object.label }}" is a post in the
   <a href="{{ object.election.get_absolute_url }}">{{ object.election.name }}</a> election</p>

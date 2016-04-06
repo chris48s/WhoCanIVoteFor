@@ -3,6 +3,11 @@
 {% load static %}
 {% load humanize %}
 
+{% block page_title %}Elections in {{ postcode }}{% endblock page_title %}
+{% block og_title %}Elections in {{ postcode }}{% endblock og_title %}
+{% block og_description %}On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_date }}, registered voters in {{ postcode }} will be able to vote in {{ posts.count|apnumber }} election{{ posts.count|pluralize }}{% endblock og_description %}
+
+
 {% block content %}
 
 <section class="columns large-12">
