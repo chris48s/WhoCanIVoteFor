@@ -58,6 +58,9 @@ docs/_build/
 # PyBuilder
 target/
 
+# SQLite
+*.sqlite3
+
 #Ipython Notebook
 .ipynb_checkpoints
 wcivf/static/COMPILED/scss/main.css.map
