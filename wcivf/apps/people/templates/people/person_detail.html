@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% if object.photo %}
 {% block og_image %}{% static object.photo.url %}{% endblock og_image %}
+{% endif %}
+
 {% block og_title %}{{ object.name }}{% endblock og_title %}
 {% block page_title %}{{ object.name }}{% endblock page_title %}
 {% block og_description %}Standing for '{{ object.posts.all.0.label }}' in {{ object.posts.all.0.election.name }}{% endblock og_description %}
