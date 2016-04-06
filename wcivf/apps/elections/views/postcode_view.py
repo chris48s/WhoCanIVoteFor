@@ -93,6 +93,11 @@ class PostcodeView(ElectionNotificationFormMixin, TemplateView):
         return posts
 
     def posts_to_people(self, post):
+        key = "person_posts_{}".format(post.ynr_id)
+        people_for_post = cache.get(key)
+        if people_for_post:
+            return people_for_post
+
         people_for_post = PersonPost.objects.filter(post=post)
         people_for_post = people_for_post.select_related('person')
 
@@ -104,6 +109,7 @@ class PostcodeView(ElectionNotificationFormMixin, TemplateView):
         people_for_post = people_for_post.order_by(*order_by)
         people_for_post = people_for_post.select_related('post')
         people_for_post = people_for_post.select_related('post__election')
+        cache.set(key, people_for_post)
         return people_for_post
 
     def get_context_data(self, **kwargs):

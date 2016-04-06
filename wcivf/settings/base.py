@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'core',
     'notifications',
     'people',
-    # 'debug_toolbar',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
