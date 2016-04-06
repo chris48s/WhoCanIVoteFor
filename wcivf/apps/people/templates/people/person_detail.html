@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% if object.photo %}
-{% block og_image %}{% static object.photo.url %}{% endblock og_image %}
-{% endif %}
+
+{% block og_image %}{% if object.photo %}{% static object.photo.url %}{% endif %}{% endblock og_image %}
+
 
 {% block og_title %}{{ object.name }}{% endblock og_title %}
 {% block page_title %}{{ object.name }}{% endblock page_title %}
