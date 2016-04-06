@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load breadcrumb_tags %}
+
+{% block content %}
+
+<div class="card">
+
+
+<h1>{{ object.name }}</h1>
+
+
+
+<p>The {{ object.name }} {% if object.in_past %}was{% else %}will be{% endif %} held on <strong>{{ object.election_date }}</strong>.</p>
+
+{% if election.person_set.count %}
+  <p>We know about <strong>{{ election.person_set.count }}</strong> candidates
+    {% if object.in_past %}that stood{% else %}standing{% endif %} for this election,
+    in <strong>{{ object.post_set.count }}</strong> posts.</p>
+  {% if not object.in_past %}
+    <p><a href="https://ccandidates.democracyclub.org.uk">Add more at our candidate crowd-sourcing site</a></p>
+  {% endif %}
+  {% else %}
+    {% if not object.in_past %}
+      <p><a href="https://ccandidates.democracyclub.org.uk">Add some candidates at our candidate crowd-sourcing site</a></p>
+    {% endif %}
+{% endif %}
+
+<h3>Posts</h3>
+<ul>
+  {% for post in object.post_set.all %}
+    <li><a href="{{ post.get_absolute_url }}">{{ post.label }}</a></li>
+  {% endfor %}
+</ul>
+
+</div>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Event",
+  "name": "{{ object.name }}",
+  "startDate" : "{{ object.election_date }}",
+  "url" : "{{ CANONICAL_URL }}{% url 'election_view' object.slug object.name|slugify %}",
+  "location" : {
+    "@type" : "Place",
+    "name" : "UK",
+  }
+}
+</script>
+
+{% endblock content %}
+
+
+
+
+{% block breadcrumbs %}
+<ol vocab="http://schema.org/" typeof="BreadcrumbList" class="breadcrumbs" aria-label="You are here:" role="navigation">
+  {% url 'home_view' as home_view %}
+  {% breadcrumb_item home_view 'Home' 1 %}
+  {% url 'elections_view' as elections %}
+  {% breadcrumb_item elections 'Elections' 2 %}
+  <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.name }}</li>
+</ol>
+
+{% endblock breadcrumbs %}

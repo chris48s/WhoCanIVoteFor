@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load breadcrumb_tags %}
+
+{% block content %}
+<h1>All Elections</h1>
+<h2>Current Elections</h2>
+{% include "elections/includes/_election_list.html" with elections=current_elections %}
+
+
+<h2>Past Elections</h2>
+{% include "elections/includes/_election_list.html" with elections=past_elections %}
+
+{% endblock content %}
+
+
+{% block breadcrumbs %}
+<ol vocab="http://schema.org/" typeof="BreadcrumbList" class="breadcrumbs" aria-label="You are here:" role="navigation">
+  {% url 'home_view' as home_view %}
+  {% breadcrumb_item home_view 'Home' 1 %}
+  <li class="disabled"><span class="show-for-sr">Current: </span> Elections</li>
+</ol>
+{% endblock breadcrumbs %}

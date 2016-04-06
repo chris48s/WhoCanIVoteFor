@@ -6,14 +6,44 @@
     <link rel="stylesheet" href="{% static "scss/main.scss"|compile %}" />
 {% endblock extra_site_css %}
 
+{% block site_meta %}
+
+{% comment %}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "url": "{{ CANONICAL_URL }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://query.example.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+{% endcomment %}
+
+{% endblock site_meta %}
 
 
 {% block site_footer %}
-<footer>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
+
+<footer class="footer">
   <div class="row">
-    <div class="columns large-12">
-      <ul >
-        <li><a href="{% url 'privacy' %}">Privacy policy</a></li>
+    <div class="small-12 medium-6 columns">
+      <p class="footer-links">
+        <a href="{% url 'home_view' %}">Home</a>
+        <a href="{% url 'elections_view' %}">All Election</a>
+        <a href="https://democracyclub.org.uk/blog/">Blog</a>
+        <a href="https://democracyclub.org.uk/contact/">Contact</a>
+      </p>
+      <p>Democracy Club is a UK based Community Interest Company that builds
+        the digital infrastructure needed for a 21st century democracy</p>
+      <ul class="inline-list social">
+        <a href="https://www.facebook.com/democracyclub/"><i class="fi-social-facebook"></i></a>
+        <a href="https://twitter.com/democlub"><i class="fi-social-twitter"></i></a>
+        <a href="https://github.com/DemocracyClub/WhoCanIVoteFor"><i class="fi-social-github"></i></a>
       </ul>
     </div>
   </div>

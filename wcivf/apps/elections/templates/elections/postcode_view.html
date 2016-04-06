@@ -75,8 +75,6 @@
         </details>
         {% endif %}
 
-
-
         {% if post.people %}
         <div class="clearfix row">
           <div class="columns large-12">
@@ -84,10 +82,10 @@
           {% if post.election.uses_lists %}
           <h3>List candidates by party</h3>
           <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
-          {% include "elections/includes/_people_list_with_lists.html" %}
+          {% include "elections/includes/_people_list_with_lists.html" with people=post.people %}
           {% else %}
           <h3>Candidates</h3>
-          {% include "elections/includes/_people_list.html" %}
+          {% include "elections/includes/_people_list.html" with people=post.people %}
           {% endif %}
           </div>
         </div>
@@ -97,14 +95,13 @@
     {% endfor %}
   </div>
 </section>
-
 {% if not polling_station.polling_station_known %}
 {# Add this at the top of the page if it's known, or at the bottom if it's not #}
 {% include "elections/includes/_polling_place.html" %}
 {% endif %}
 
-
 {% endblock content %}
+
 
 {% block in_page_javascript %}
 <script>

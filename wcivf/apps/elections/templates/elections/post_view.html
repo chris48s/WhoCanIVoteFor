@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load breadcrumb_tags %}
+
+{% block content %}
+
+<div class="card">
+
+
+<h1>{{ object.label }}</h1>
+
+
+
+<p>"{{ object.label }}" is a post in the
+  <a href="{{ object.election.get_absolute_url }}">{{ object.election.name }}</a> election</p>
+
+
+
+{% if object.person_set.count %}
+  <p>We know about <strong>{{ object.person_set.count }}</strong> candidates
+    {% if object.election.in_past %}that stood{% else %}standing{% endif %} in this post.</p>
+  {% if not object.election.in_past %}
+    <p><a href="https://ccandidates.democracyclub.org.uk">Add more at our candidate crowd-sourcing site</a></p>
+  {% endif %}
+  {% else %}
+    {% if not object.election.in_past %}
+      <p><a href="https://ccandidates.democracyclub.org.uk">Add some candidates at our candidate crowd-sourcing site</a></p>
+    {% endif %}
+{% endif %}
+
+
+<div class="clearfix row">
+  <div class="columns large-12">
+    <p></p>
+  {% if post.election.uses_lists %}
+  <h3>List candidates by party</h3>
+  <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
+  {% include "elections/includes/_people_list_with_lists.html" with people=object.person_set %}
+  {% else %}
+  <h3>Candidates</h3>
+  {% include "elections/includes/_people_list.html" with people=object.personpost_set.all %}
+  {% endif %}
+  </div>
+</div>
+
+
+</div>
+
+{% endblock content %}
+
+
+
+
+{% block breadcrumbs %}
+<ol vocab="http://schema.org/" typeof="BreadcrumbList" class="breadcrumbs" aria-label="You are here:" role="navigation">
+  {% url 'home_view' as home_view %}
+  {% breadcrumb_item home_view 'Home' 1 %}
+
+  {% url 'elections_view' as elections %}
+  {% breadcrumb_item elections 'Elections' 2 %}
+
+  {% url 'election_view' object.election.slug object.election.name|slugify as election %}
+  {% breadcrumb_item election object.election.name 3 %}
+
+  <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.label }}</li>
+</ol>
+
+{% endblock breadcrumbs %}

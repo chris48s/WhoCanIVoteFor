@@ -70,6 +70,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'dc_theme.context_processors.dc_theme_context',
+                'core.context_processors.canonical_url',
             ],
         },
     },
@@ -115,7 +116,7 @@ STATICFILES_DIRS = (
     root('assets'),
     root('static'),
 )
-STATIC_ROOT = root('static_root')
+# STATIC_ROOT = root('static_root')
 
 # TODO find a way to move these in to the DC theme app?
 STATIC_PRECOMPILER_ROOT = root('static')
@@ -148,6 +149,7 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
 YNR_BASE = "https://candidates.democracyclub.org.uk"
+CANONICAL_URL = "https://whocanivotefor.co.uk"
 
 SITE_TITLE = "Who Can I Vote For?"
 

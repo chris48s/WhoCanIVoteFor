@@ -1,4 +1,9 @@
+import datetime
+
 from django.db import models
+from django.core.urlresolvers import reverse
+from django.utils.text import slugify
+
 
 from .managers import ElectionManager, PostManager
 
@@ -24,6 +29,33 @@ class Election(models.Model):
     def __str__(self):
         return self.name
 
+    def in_past(self):
+        return self.election_date < datetime.date.today()
+
+    @property
+    def nice_election_name(self):
+        if self.election_type == "local":
+            return "Local"
+        if self.election_type == "sp":
+            return "Scottish parliament"
+        if self.election_type == "naw":
+            return "Welsh assembly"
+        if self.election_type == "gla":
+            return "Greater London assembly"
+        if self.election_type == "pcc":
+            return "Police and crime commissioner"
+        if self.election_type == "mayor":
+            return "City mayor"
+        if self.election_type == "nia":
+            return "Northern Ireland assembly"
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('election_view', args=[
+                str(self.slug),
+                slugify(self.name)
+            ])
+
 
 class Post(models.Model):
     """
@@ -39,6 +71,13 @@ class Post(models.Model):
     election = models.ForeignKey(Election)
 
     objects = PostManager()
+
+    def get_absolute_url(self):
+        return reverse('post_view', args=[
+                str(self.election.slug),
+                str(self.ynr_id),
+                slugify(self.label)
+            ])
 
 
 class VotingSystem(models.Model):
