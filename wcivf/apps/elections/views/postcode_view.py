@@ -102,7 +102,8 @@ class PostcodeView(ElectionNotificationFormMixin, TemplateView):
             order_by = ['person__name']
 
         people_for_post = people_for_post.order_by(*order_by)
-
+        people_for_post = people_for_post.select_related('post')
+        people_for_post = people_for_post.select_related('post__election')
         return people_for_post
 
     def get_context_data(self, **kwargs):
