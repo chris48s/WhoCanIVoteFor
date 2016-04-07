@@ -46,7 +46,14 @@
 </script>
 {% endcomment %}{% endblock extra_site_css %}
 
-
+{% block top_banner %}
+<div id="top_banner">
+  <div class="row">
+    <div class="columns large-12">
+      <p><strong>BETA</strong>: This web site is new, <a href="{% url 'about_view' %}#contact">we'd love to hear your feedback</a>.</p>
+    </div>
+  </div>
+</div>{% endblock top_banner %}
 
 
 

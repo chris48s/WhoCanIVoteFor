@@ -7742,4 +7742,15 @@ body > header {
       text-decoration: underline;
       font-weight: bold; }
 
+#top_banner {
+  background-color: #6AA4D6; }
+  #top_banner p {
+    margin: 0;
+    line-height: 2em;
+    color: white; }
+    #top_banner p a {
+      font-weight: bold;
+      color: white;
+      text-decoration: underline; }
+
 /*# sourceMappingURL=main.css.map */

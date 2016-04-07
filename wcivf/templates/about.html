@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load markdown_deux_tags %}
 
+{% block og_title %}About WhoCanIVoteFor{% endblock og_title %}
+{% block page_title %}About WhoCanIVoteFor{% endblock page_title %}
+
 {% block content %}
 <div class="row">
   <div class="columns large-8 large-centered">
@@ -10,13 +13,16 @@
 
 # About WhoCanIVoteFor
 
-Please email [hello@democracyclub.org.uk](mailto:hello@democracyclub.org.uk)
-with any feedback or bug reports. If
-you'd like to discuss this site or any other project relating to elections in
-the UK, we'd suggest that you post to the Democracy Club Google Group.
+## Contact
 
-The source code for this site is available on [GitHub](https://github.com/DemocracyClub/WhoCanIVoteFor),
-and you can find [a list of known bugs](https://github.com/DemocracyClub/WhoCanIVoteFor/issues) there as well.
+Please email **[hello@democracyclub.org.uk](mailto:hello@democracyclub.org.uk)**
+with any feedback or bug reports, tweet us **[@democlub](https://twitter.com/democlub)** or
+**[talk to us on Facebook](https://www.facebook.com/democracyclub/)**.
+
+If you'd like to discuss this site or any other project relating to elections in
+the UK, we'd suggest that you post to the **[Democracy Club Google Group](https://groups.google.com/forum/#!forum/democracy-club)**.
+
+## About
 
 This site was developed by [Democracy Club](https://democracyclub.org.uk), specifically
 [Sym Roe](https://twitter.com/symroe), [Joe Mitchell](https://twitter.com/j0e_m)
@@ -46,6 +52,10 @@ For complicated reasons relating to database licensing, we have put the data
 as of the 4th of March 2015 into the public domain by declaring it to be CC0.
 This data is available here but please be warned that this snapshot will
 become inaccurate very quickly - please use the up-to-date data instead.
+
+The source code for this site is available on [GitHub](https://github.com/DemocracyClub/WhoCanIVoteFor),
+and you can find [a list of known bugs](https://github.com/DemocracyClub/WhoCanIVoteFor/issues) there as well.
+
 
 ## Privacy Policy
 [The privacy policy of this site can be found here]({% url 'privacy_view' %}).

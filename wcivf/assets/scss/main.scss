@@ -75,3 +75,19 @@
     }
   }
 }
+
+
+#top_banner {
+  background-color: #6AA4D6;
+
+  p {
+    margin:0;
+    line-height:2em;
+    color:$white;
+    a {
+      font-weight:bold;
+      color:$white;
+      text-decoration:underline;
+    }
+  }
+}
