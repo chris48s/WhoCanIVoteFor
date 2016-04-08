@@ -18,4 +18,6 @@ class PersonView(DetailView):
         except queryset.model.DoesNotExist:
             raise Http404("No %(verbose_name)s found matching the query" %
                           {'verbose_name': queryset.model._meta.verbose_name})
+        obj.current_posts = obj.posts.filter(personpost__post__election__current=True)
+        obj.past_posts = obj.posts.filter(personpost__post__election__current=False)
         return obj
