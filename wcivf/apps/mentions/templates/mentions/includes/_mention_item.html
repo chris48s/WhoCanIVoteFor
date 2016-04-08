@@ -1,5 +1,5 @@
 <div class="mention_item">
-  <h4><a herf="{{ mention.url }}">{{ mention.title }}</a></h4>
+  <h4><a href="{{ mention.url }}">{{ mention.title }}</a></h4>
   <blockquote cite="{{ mention.url }}">
   {% if mention.truncated_left %}…{% endif %}
   {{ mention.quote|safe }}
