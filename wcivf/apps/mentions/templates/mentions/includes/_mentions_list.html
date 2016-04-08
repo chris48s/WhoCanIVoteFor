@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="columns large-12">
+    <div class="mentions_list card">
+      <h2>Mentions of {{ object.name }} in the news</h2>
+      {% for mention in mentions|slice:":20" %}
+        {% include "mentions/includes/_mention_item.html" with mention=mention %}
+      {% endfor %}
+    </div>
+
+  </div>
+</div>

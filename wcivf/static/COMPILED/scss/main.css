@@ -7743,7 +7743,7 @@ body > header {
       font-weight: bold; }
 
 #top_banner {
-  background-color: #6AA4D6; }
+  background-color: #000; }
   #top_banner p {
     margin: 0;
     line-height: 2em;
@@ -7752,5 +7752,12 @@ body > header {
       font-weight: bold;
       color: white;
       text-decoration: underline; }
+
+.mentions_list .mention_item {
+  margin-bottom: 3em; }
+  .mentions_list .mention_item h4 {
+    font-size: 1.3em; }
+  .mentions_list .mention_item blockquote {
+    color: black; }
 
 /*# sourceMappingURL=main.css.map */

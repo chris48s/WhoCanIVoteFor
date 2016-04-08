@@ -1,0 +1,11 @@
+<div class="mention_item">
+  <h4><a herf="{{ mention.url }}">{{ mention.title }}</a></h4>
+  <blockquote cite="{{ mention.url }}">
+  {% if mention.truncated_left %}…{% endif %}
+  {{ mention.quote|safe }}
+  {% if mention.truncated_right %}…{% endif %}
+  <footer>
+    <cite><date>{{ mention.date_published }}</date> <a href="{{ mention.url }}">{{ mention.url }}</a></cite>
+  </footer>
+  </blockquote>
+</div>

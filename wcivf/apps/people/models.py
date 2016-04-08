@@ -53,7 +53,6 @@ class PersonManager(models.Manager):
             img_temp.flush()
 
             person_obj.photo.save(person['thumbnail'], File(img_temp))
-            print(person_obj.ynr_id)
             person_obj.save()
 
         if posts:
