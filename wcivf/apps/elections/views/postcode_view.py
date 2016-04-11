@@ -82,8 +82,12 @@ class PostcodeiCalView(PostcodeToPostsMixin, TemplateView,
             event['dtend'] = post.election.election_date.strftime("%Y%m%dT220000")
 
             if polling_station['polling_station_known']:
+                event['geo'] = "{} {}".format(
+                    polling_station['polling_station']['location']['latitude'],
+                    polling_station['polling_station']['location']['longitude'],
+                )
                 event['location'] = vText("{}, {}".format(
-                    polling_station['polling_station']['address'].replace('\n', ','),
+                    polling_station['polling_station']['address'].replace('\n', ', '),
                     polling_station['polling_station']['postcode'],
                 ))
 
