@@ -1,3 +1,6 @@
+import datetime
+import pytz
+
 from icalendar import Calendar, Event, vText
 
 from django.http import HttpResponse
@@ -81,8 +84,19 @@ class PostcodeiCalView(PostcodeToPostsMixin, TemplateView,
             event = Event()
             event['uid'] = "{}-{}".format(post.ynr_id, post.election.slug)
             event['summary'] = "{} - {}".format(post.election.name, post.label)
-            event['dtstart'] = post.election.election_date.strftime("%Y%m%dT060000")
-            event['dtend'] = post.election.election_date.strftime("%Y%m%dT220000")
+
+            local_tz = pytz.timezone("Europe/London")
+            election_date = post.election.election_date
+            election_datetime = datetime.datetime.fromordinal(election_date.toordinal())
+            election_datetime.replace(tzinfo=local_tz)
+            start_time = election_datetime.replace(hour=6)
+            end_time = election_datetime.replace(hour=6)
+
+            def utc_to_local(utc_dt):
+                return utc_dt.replace(tzinfo=pytz.utc).astimezone(local_tz)
+
+            event.add('dtstart', utc_to_local(start_time))
+            event.add('dtend', utc_to_local(end_time))
 
             if polling_station['polling_station_known']:
                 event['geo'] = "{};{}".format(
