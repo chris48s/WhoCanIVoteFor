@@ -72,6 +72,9 @@ class PostcodeiCalView(PostcodeToPostsMixin, TemplateView,
 
         cal = Calendar()
         cal['summary'] = 'Elections in {}'.format(postcode)
+        cal['X-WR-CALNAME'] = 'Elections in {}'.format(postcode)
+        cal['X-WR-TIMEZONE'] = 'Europe/London'
+
         cal.add('version', '2.0')
         cal.add('prodid', '-//Elections in {}//mxm.dk//'.format(postcode))
         for post in self.postcode_to_posts(postcode):
