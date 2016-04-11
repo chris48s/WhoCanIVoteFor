@@ -82,7 +82,7 @@ class PostcodeiCalView(PostcodeToPostsMixin, TemplateView,
 
             if polling_station['polling_station_known']:
                 event['location'] = vText("{}, {}".format(
-                    polling_station['polling_station']['address'],
+                    polling_station['polling_station']['address'].replace('\n', ','),
                     polling_station['polling_station']['postcode'],
                 ))
 
