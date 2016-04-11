@@ -78,8 +78,8 @@ class PostcodeiCalView(PostcodeToPostsMixin, TemplateView,
             event = Event()
             event['uid'] = "{}-{}".format(post.ynr_id, post.election.slug)
             event['summary'] = "{} - {}".format(post.election.name, post.label)
-            event['dtstart'] = post.election.election_date.strftime("%Y%m%d")
-            event['dtend'] = post.election.election_date.strftime("%Y%m%d")
+            event['dtstart'] = post.election.election_date.strftime("%Y%m%dT060000")
+            event['dtend'] = post.election.election_date.strftime("%Y%m%dT220000")
 
             if polling_station['polling_station_known']:
                 event['location'] = vText("{}, {}".format(
