@@ -105,6 +105,17 @@
 {% include "elections/includes/_polling_place.html" %}
 {% endif %}
 
+<section>
+  <div class="columns large-12">
+    <div class="card">
+      <p>
+        Calendar of elections in {{ postcode }}:
+        <a href="webcal://whocanivotefor.co.uk{% url 'postcode_ical_view' postcode %}">iCal feed</a>
+      </p>
+    </div>
+  </div>
+</section>
+
 {% endblock content %}
 
 

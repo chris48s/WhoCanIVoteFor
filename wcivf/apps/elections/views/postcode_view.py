@@ -1,5 +1,6 @@
 from icalendar import Calendar, Event, vText
 
+from django.conf import settings
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View
 from django.core.cache import cache
@@ -85,6 +86,10 @@ class PostcodeiCalView(PostcodeToPostsMixin, View,
 
             event.add('dtstart', post.election.start_time)
             event.add('dtend', post.election.end_time)
+            event.add('DESCRIPTION', "Find out more at {}/elections/{}/".format(
+                settings.CANONICAL_URL,
+                postcode
+            ))
 
             if polling_station['polling_station_known']:
                 event['geo'] = "{};{}".format(
