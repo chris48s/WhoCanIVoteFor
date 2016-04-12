@@ -23,11 +23,11 @@
     {% if object.in_past %}that stood{% else %}standing{% endif %} for this election,
     in <strong>{{ object.post_set.count }}</strong> posts.</p>
   {% if not object.in_past %}
-    <p><a href="https://ccandidates.democracyclub.org.uk">Add more at our candidate crowd-sourcing site</a></p>
+    <p><a href="https://candidates.democracyclub.org.uk">Add more at our candidate crowd-sourcing site</a></p>
   {% endif %}
   {% else %}
     {% if not object.in_past %}
-      <p><a href="https://ccandidates.democracyclub.org.uk">Add some candidates at our candidate crowd-sourcing site</a></p>
+      <p><a href="https://candidates.democracyclub.org.uk">Add some candidates at our candidate crowd-sourcing site</a></p>
     {% endif %}
 {% endif %}
 
