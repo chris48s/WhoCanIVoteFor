@@ -1,4 +1,5 @@
 import datetime
+import pytz
 
 from django.db import models
 from django.core.urlresolvers import reverse
@@ -6,6 +7,12 @@ from django.utils.text import slugify
 
 
 from .managers import ElectionManager, PostManager
+
+LOCAL_TZ = pytz.timezone("Europe/London")
+
+
+def utc_to_local(utc_dt):
+    return utc_dt.replace(tzinfo=pytz.utc).astimezone(LOCAL_TZ)
 
 
 class Election(models.Model):
@@ -50,11 +57,28 @@ class Election(models.Model):
             return "Northern Ireland assembly"
         return self.name
 
+    def _election_datetime_tz(self):
+        election_date = self.election_date
+        election_datetime = datetime.datetime.fromordinal(
+            election_date.toordinal())
+        election_datetime.replace(tzinfo=LOCAL_TZ)
+        return election_datetime
+
+    @property
+    def start_time(self):
+        election_datetime = self._election_datetime_tz()
+        return utc_to_local(election_datetime.replace(hour=6))
+
+    @property
+    def end_time(self):
+        election_datetime = self._election_datetime_tz()
+        return utc_to_local(election_datetime.replace(hour=22))
+
     def get_absolute_url(self):
         return reverse('election_view', args=[
-                str(self.slug),
-                slugify(self.name)
-            ])
+            str(self.slug),
+            slugify(self.name)
+        ])
 
 
 class Post(models.Model):

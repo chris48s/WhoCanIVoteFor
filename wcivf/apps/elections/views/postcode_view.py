@@ -1,10 +1,7 @@
-import datetime
-import pytz
-
 from icalendar import Calendar, Event, vText
 
 from django.http import HttpResponse
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from django.core.cache import cache
 
 from .mixins import (ElectionNotificationFormMixin,
@@ -66,7 +63,7 @@ class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
         return context
 
 
-class PostcodeiCalView(PostcodeToPostsMixin, TemplateView,
+class PostcodeiCalView(PostcodeToPostsMixin, View,
                        PollingStationInfoMixin):
 
     def get(self, request, *args, **kwargs):
@@ -85,18 +82,9 @@ class PostcodeiCalView(PostcodeToPostsMixin, TemplateView,
             event['uid'] = "{}-{}".format(post.ynr_id, post.election.slug)
             event['summary'] = "{} - {}".format(post.election.name, post.label)
 
-            local_tz = pytz.timezone("Europe/London")
-            election_date = post.election.election_date
-            election_datetime = datetime.datetime.fromordinal(election_date.toordinal())
-            election_datetime.replace(tzinfo=local_tz)
-            start_time = election_datetime.replace(hour=6)
-            end_time = election_datetime.replace(hour=6)
 
-            def utc_to_local(utc_dt):
-                return utc_dt.replace(tzinfo=pytz.utc).astimezone(local_tz)
-
-            event.add('dtstart', utc_to_local(start_time))
-            event.add('dtend', utc_to_local(end_time))
+            event.add('dtstart', post.election.start_time)
+            event.add('dtend', post.election.end_time)
 
             if polling_station['polling_station_known']:
                 event['geo'] = "{};{}".format(
