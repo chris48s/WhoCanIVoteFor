@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'notifications',
     'people',
     'mentions',
+    'parties',
     # 'debug_toolbar',
 )
 

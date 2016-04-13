@@ -1,5 +1,21 @@
 @import 'dc_base';
 
+
+@mixin box_shadow ($level) {
+    @if $level == 1 {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    } @else if $level == 2 {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    } @else if $level == 3 {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    } @else if $level == 4 {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    } @else if $level == 5 {
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    }
+}
+
+
 .party_list_row {
   overflow:scroll;
   clear:right;
@@ -7,6 +23,7 @@
     width:2000%;
   }
 }
+// Cards
 
 .party_card {
   width:400px;
@@ -22,59 +39,128 @@
 
 
 .candidate_card,  {
-  background-color:#263238;
-  margin:0.2em;
-  padding:0;
-  width:200px;
-  &.candidate_card_list_candidate {
-    width:160px;
+  background-color:#FEFEFE;
+  &:hover {
+    @include box_shadow(2);
+    -webkit-transform: translateY(-5px);
+    -moz-transform: translateY(-5px);
+    transform: translateY(-5px);
+    z-index:10;
   }
+  @include box_shadow(1);
+  -webkit-transition: all 250ms;
+  -moz-transition: all 250ms;
+
+  margin:0.4em;
+  padding:0;
+  width:350px;
+  height:197px;
+  float:left;
+  position:relative;
+
+//  &.candidate_card_list_candidate {
+//    width:255px;
+//  }
   @include breakpoint(medium down) {
-    width:47%;
+    width:95%;
+    height:260px;
     &.candidate_card_list_candidate {
       width:110px;
     }
   }
 
-  float:left;
-  position:relative;
+  header {
+    .candidate_info {
+      position:absolute;
+      top:1.5em;
+      left:1.5em;
+      font-size: 1em;
+      width: 205px;
 
-  .candidate_list_position {
-    background-color: #FFF;
-    padding: 0em;
-    color: #000;
-    width: 1.5em;
-    height: 1.5em;
-    font-size: 1.5em;
-    margin: 0;
-    text-align: center;
-    position: absolute;
-    left: 0.2em;
-    top: 0.2em;
-    border:1px solid #AAA;
+      @include breakpoint(medium down) {
+        top:110px;
+        left:0;
+        width:100%;
+        margin:0.5em;
+        text-align:center;
+      }
+      @include breakpoint(small down) {
+        width:90%;
+      }
+
+
+
+      h4.candidate_name {
+        font-size: 1.3em;
+      }
+
+    }
+
+    .candidate_list_position {
+      position:absolute;
+      top:1.5em;
+      left:0.5em;
+      display:block;
+      background-color:#FFF;
+      font-size:2em;
+    }
+
+    .person_photo {
+      position:absolute;
+      top:1.5em;
+      right:1.5em;
+      display:block;
+      width:100px;
+      @include breakpoint(medium down) {
+        top:10px;
+        left:0;
+        width:100%;
+        text-align:center;
+        img {
+          width:100px;
+        }
+      }
+    }
   }
 
-  .candidate_photo {
-    width:100%;
-  }
-  .candidate_info {
-    padding:0.5em;
-    font-size:0.8em;
-    background-color:#455A64;
-    color:#FFF;
-    line-height:2em;
-    .candidate_info_inner {
-      height:6em;
-      display:table-cell;
-      vertical-align: middle;
-    }
-    a {
-      color:#FFF;
-      text-decoration:underline;
-      font-weight:bold;
-    }
+    footer {
+//      background-color:#263238;
+      background-color:#E2E2E2;
+      height:50px;
+      position:absolute;
+      bottom:0;
+      left:0;
+      right:0;
+      .candidate_extra_info {
+        position:absolute;
+        bottom:15px;
+        left:15px;
+        width:60px;
+        height:60px;
+        border:1px solid #CCC;
+        background-color:#FFF;
+      }
+      .expand {
+        position:absolute;
+        bottom:10px;
+        right:10px;
+        font-size:2em;
+        border-radius: 50%;
+        background-color:#FFF;
+        @include box_shadow(1);
+        i {
+          font-size:33px;
+        }
+      }
   }
 }
+
+
+
+
+
+
+
 
 
 #top_banner {

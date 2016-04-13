@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.utils.text import slugify
 
 from elections.models import Election, Post
+from parties.models import Party
 
 
 class PersonManager(models.Manager):
@@ -40,12 +41,19 @@ class PersonManager(models.Manager):
                 posts.append(post)
 
             if person['memberships'][0]['on_behalf_of']:
-                defaults['party_name'] = person['memberships'][0]['on_behalf_of']['name']
+                defaults['party'] = Party.objects.get(
+                    pk=person['memberships'][0]['on_behalf_of']['id'])
 
         person_obj, _ = self.get_or_create(
             ynr_id=person['id'],
             defaults=defaults
         )
+
+        if person['memberships']:
+            print(person['memberships'][0])
+            person_obj.party = Party.objects.get(
+                pk=person['memberships'][0]['on_behalf_of']['id'])
+            person_obj.save()
 
         if person['thumbnail']:
             img_temp = NamedTemporaryFile(delete=True)
@@ -83,8 +91,7 @@ class Person(models.Model):
     birth_date = models.CharField(null=True, max_length=255)
     photo = models.ImageField(upload_to="people/photos", null=True)
 
-    # TODO Turn parties in to a model/app
-    party_name = models.CharField(blank=True, max_length=255)
+    party = models.ForeignKey(Party, null=True)
 
     posts = models.ManyToManyField(Post, through=PersonPost)
 
