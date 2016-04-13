@@ -50,7 +50,6 @@ class PersonManager(models.Manager):
         )
 
         if person['memberships']:
-            print(person['memberships'][0])
             person_obj.party = Party.objects.get(
                 pk=person['memberships'][0]['on_behalf_of']['id'])
             person_obj.save()
@@ -65,6 +64,9 @@ class PersonManager(models.Manager):
 
         if posts:
             for post in posts:
+                # Delete old posts for this person
+                PersonPost.objects.filter(person=person_obj).delete()
+
                 PersonPost.objects.get_or_create(
                     post=post,
                     person=person_obj,
