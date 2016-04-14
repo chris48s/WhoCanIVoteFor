@@ -77,6 +77,7 @@ TEMPLATES = [
                 'dc_theme.context_processors.dc_theme_context',
                 'core.context_processors.canonical_url',
                 'core.context_processors.use_compress_css',
+                'core.context_processors.postcode_form',
             ],
         },
     },

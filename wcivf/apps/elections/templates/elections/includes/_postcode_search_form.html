@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="columns large-12">
+    <div class="card">
+      <h3>All elections where you live</h3>
+      <p>Enter your postcode to get information about elections,
+        who your candidates are and where you can vote (your polling station)</p>
+      <form method="post" action="/" class="large-3">
+        {% csrf_token %}
+        {{ postcode_form }}
+        <button type="submit" class="button">Search</button>
+      </form>
+    </div>
+  </div>
+</div>
