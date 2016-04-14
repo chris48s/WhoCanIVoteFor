@@ -1,3 +1,5 @@
+import re
+
 from icalendar import Calendar, Event, vText
 
 from django.conf import settings
@@ -42,9 +44,17 @@ class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
         cache.set(key, people_for_post)
         return people_for_post
 
+
+    def clean_postcode(self, postcode):
+        incode_pattern = '[0-9][ABD-HJLNP-UW-Z]{2}'
+        space_regex = re.compile(r' *(%s)$' % incode_pattern)
+        postcode = space_regex.sub(r' \1', postcode)
+        return postcode
+
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['postcode'] = kwargs['postcode']
+        context['postcode'] = self.clean_postcode(kwargs['postcode'])
         context['posts'] = self.postcode_to_posts(context['postcode'])
         context['people_for_post'] = {}
         for post in context['posts']:

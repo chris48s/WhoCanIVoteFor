@@ -11,7 +11,7 @@ class HomePageView(FormView):
     form_class = PostcodeLookupForm
 
     def form_valid(self, form):
-        postcode = form.cleaned_data['postcode'].replace(' ', '')
+        postcode = form.cleaned_data['postcode']
         self.success_url = reverse(
             'postcode_view',
             kwargs={'postcode': postcode}

@@ -1,6 +1,7 @@
-<h2 class="card_header">Get email alerts for future elections</h2>
-{% if postcode in request.session.notification_form_filed %}
-  Thanks, you're signed up for notifications about future elections in {{ postcode }}!
+<h2 class="card_header">Free election reminders</h2>
+{% if postcode in request.session.notification_for_postcode %}
+  <h4>Thanks</h4>
+  <p>You're signed up for notifications about elections in {{ postcode }}.</p>
 {% else %}
 <form method="post">
   {% csrf_token %}

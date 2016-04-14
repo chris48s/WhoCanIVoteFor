@@ -20,14 +20,22 @@ class ElectionNotificationFormMixin(object):
             context['notification_form'] = self.notification_form()
         return context
 
+    def save_postcode_to_session(self, postcode):
+        notification_for_postcode = self.request.session.get(
+            'notification_for_postcode', [])
+        notification_for_postcode.append(postcode)
+        self.request.session['notification_for_postcode'] = \
+            notification_for_postcode
+        self.request.session.modified = True
+
     def post(self, request, *args, **kwargs):
         if 'form_name' in request.POST:
             if request.POST['form_name'] == "postcode_notification":
                 form = self.notification_form(request.POST)
                 if form.is_valid():
                     form.save()
-                    request.session['notification_form_filed'] = \
-                        form.cleaned_data['postcode']
+                    self.save_postcode_to_session(
+                        form.cleaned_data['postcode'])
                     url = request.build_absolute_uri()
                     return HttpResponseRedirect(url)
                 else:
