@@ -6,7 +6,9 @@
       <div class="card">
         <div class="row">
           <div class="columns large-3">
+            {% if person_post.list.0.person.party.emblem %}
             <img src="{{ person_post.list.0.person.party.emblem.url }}" width="70px" height="70px">
+            {% endif %}
           </div>
           <div class="columns large-9">
             <h4>{{ person_post.grouper }}</h4>
