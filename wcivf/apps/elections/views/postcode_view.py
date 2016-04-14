@@ -7,13 +7,13 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView, View
 from django.core.cache import cache
 
-from .mixins import (ElectionNotificationFormMixin,
+from .mixins import (ElectionNotificationFormMixin, LogLookUpMixin,
                      PostcodeToPostsMixin, PollingStationInfoMixin)
 from people.models import PersonPost
 
 
 class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
-                   PollingStationInfoMixin, TemplateView):
+                   PollingStationInfoMixin, LogLookUpMixin, TemplateView):
     """
     This is the main view that takes a postcode and shows all elections
     for that area, with related information.
@@ -51,10 +51,10 @@ class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
         postcode = space_regex.sub(r' \1', postcode)
         return postcode
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['postcode'] = self.clean_postcode(kwargs['postcode'])
+        self.log_postcode(context['postcode'])
         context['posts'] = self.postcode_to_posts(context['postcode'])
         context['people_for_post'] = {}
         for post in context['posts']:

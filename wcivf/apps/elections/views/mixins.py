@@ -4,8 +4,9 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.core.cache import cache
 
-from ..models import Post
 from notifications.forms import PostcodeNotificationForm
+from core.models import LoggedPostcode
+from ..models import Post
 
 
 class ElectionNotificationFormMixin(object):
@@ -89,3 +90,12 @@ class PollingStationInfoMixin(object):
         info.update(req.json())
         cache.set(key, info)
         return info
+
+
+class LogLookUpMixin(object):
+    def log_postcode(self, postcode):
+        kwargs = {
+            'postcode': postcode,
+        }
+        kwargs.update(self.request.session['utm_data'])
+        LoggedPostcode.objects.create(**kwargs)
