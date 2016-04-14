@@ -10,6 +10,7 @@ django-extensions==1.6.1
 django-redis
 Pillow
 icalendar
+dealer
 
 git+https://github.com/DemocracyClub/django-static-precompiler
 git+git://github.com/DemocracyClub/dc_base_theme.git

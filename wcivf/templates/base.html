@@ -18,20 +18,18 @@
 {% endblock site_meta %}
 
 {% block extra_site_css %}{% if USE_COMPRESSED_CSS %}
-
     <style type="text/css">{% include "_compressed_css.html" %}</style>
     <script id="loadcss">
-    (function(u,s){!function(e){"use strict";var n=function(n,t,o){var l,r=e.document,i=r.createElement("link");if(t)l=t;else{var a=(r.body||r.getElementsByTagName("head")[0]).childNodes;l=a[a.length-1]}var d=r.styleSheets;i.rel="stylesheet",i.href=n,i.media="only x",l.parentNode.insertBefore(i,t?l:l.nextSibling);var f=function(e){for(var n=i.href,t=d.length;t--;)if(d[t].href===n)return e();setTimeout(function(){f(e)})};return i.onloadcssdefined=f,f(function(){i.media=o||"all"}),i};"undefined"!=typeof module?module.exports=n:e.loadCSS=n}("undefined"!=typeof global?global:this);for(var i in u){loadCSS(u[i],s);}}(['https://fonts.googleapis.com/css?family=Roboto','//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css','/static/COMPILED/scss/main.css'],document.getElementById("loadcss")));
+    (function(u,s){!function(e){"use strict";var n=function(n,t,o){var l,r=e.document,i=r.createElement("link");if(t)l=t;else{var a=(r.body||r.getElementsByTagName("head")[0]).childNodes;l=a[a.length-1]}var d=r.styleSheets;i.rel="stylesheet",i.href=n,i.media="only x",l.parentNode.insertBefore(i,t?l:l.nextSibling);var f=function(e){for(var n=i.href,t=d.length;t--;)if(d[t].href===n)return e();setTimeout(function(){f(e)})};return i.onloadcssdefined=f,f(function(){i.media=o||"all"}),i};"undefined"!=typeof module?module.exports=n:e.loadCSS=n}("undefined"!=typeof global?global:this);for(var i in u){loadCSS(u[i],s);}}(['https://fonts.googleapis.com/css?family=Roboto','//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css','/static/COMPILED/scss/main.css?{{ REVISION }}'],document.getElementById("loadcss")));
     </script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <noscript>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/static/COMPILED/scss/main.css">
+    <link rel="stylesheet" href="/static/COMPILED/scss/main.css?{{ REVISION }}">
     </noscript>
 {% else %}
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static "scss/main.scss"|compile %}" />{% endif %}
+    <link rel="stylesheet" href="{% static "scss/main.scss"|compile %}?{{ REVISION }}" />{% endif %}
 {% endblock extra_site_css %}
 
 {% block top_banner %}
