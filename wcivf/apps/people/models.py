@@ -21,9 +21,24 @@ class PersonManager(models.Manager):
             'gender': person['gender'] or None,
             'birth_date': person['birth_date'] or None,
         }
+
+        version_data = person['versions'][0]['data']
+        if 'twitter_username' in version_data:
+            defaults['twitter_username'] = version_data['twitter_username']
+        if 'facebook_page_url' in version_data:
+            defaults['facebook_page_url'] = version_data['facebook_page_url']
+        if 'facebook_personal_url' in version_data:
+            defaults['facebook_personal_url'] = \
+                version_data['facebook_personal_url']
+        if 'linkedin_url' in version_data:
+            defaults['linkedin_url'] = version_data['linkedin_url']
+        if 'homepage_url' in version_data:
+            defaults['homepage_url'] = version_data['homepage_url']
+        if 'wikipedia_url' in version_data:
+            defaults['wikipedia_url'] = version_data['wikipedia_url']
+
         if person['memberships']:
             for membership in person['memberships']:
-
 
                 if membership['election']:
                     election, _ = Election.objects.update_or_create(
@@ -48,6 +63,9 @@ class PersonManager(models.Manager):
             ynr_id=person['id'],
             defaults=defaults
         )
+        if person_obj.wikipedia_url:
+            person_obj.wikipedia_bio = get_wikipedia_extract(person_obj)
+            person_obj.save()
 
         if person['memberships']:
             person_obj.party = Party.objects.get(
@@ -76,6 +94,7 @@ class PersonManager(models.Manager):
                 )
         if elections:
             person_obj.elections.add(*elections)
+
         return (person_obj, _)
 
 
@@ -93,10 +112,19 @@ class Person(models.Model):
     birth_date = models.CharField(null=True, max_length=255)
     photo = models.ImageField(upload_to="people/photos", null=True)
 
+    # contact points
+    twitter_username = models.CharField(blank=True, null=True, max_length=100)
+    facebook_page_url = models.CharField(blank=True, null=True, max_length=800)
+    facebook_personal_url = models.CharField(blank=True, null=True, max_length=800)
+    linkedin_url = models.CharField(blank=True, null=True, max_length=800)
+    homepage_url = models.CharField(blank=True, null=True, max_length=800)
+
+    #Bios
+    wikipedia_url = models.CharField(blank=True, null=True, max_length=800)
+    wikipedia_bio = models.TextField(null=True)
+
     party = models.ForeignKey(Party, null=True)
-
     posts = models.ManyToManyField(Post, through=PersonPost)
-
     elections = models.ManyToManyField(Election)
 
     objects = PersonManager()
