@@ -7,12 +7,12 @@ from django.conf import settings
 
 
 class PartyManager(models.Manager):
-    def get_or_create_from_ynr(self, party):
+    def update_or_create_from_ynr(self, party):
         defaults = {
             'party_name': party['name']
         }
 
-        party_obj, _ = self.get_or_create(
+        party_obj, _ = self.update_or_create(
             party_id=party['id'],
             defaults=defaults
         )

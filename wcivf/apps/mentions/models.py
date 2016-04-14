@@ -4,7 +4,7 @@ from people.models import Person
 from elections.models import Post
 
 class MentionsManager(models.Manager):
-    def get_or_create_from_em(self, mention):
+    def update_or_create_from_em(self, mention):
         defaults = {
             'date_order': mention['date_order'],
             'date_published': mention['date_published'],
@@ -17,7 +17,7 @@ class MentionsManager(models.Manager):
             'url': mention['url'],
         }
 
-        mention_obj, _ = self.get_or_create(
+        mention_obj, _ = self.update_or_create(
             article_id=mention['article_id'],
             defaults=defaults
         )

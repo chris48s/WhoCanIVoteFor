@@ -15,7 +15,7 @@ class Command(BaseCommand):
             if not mention['quote']:
                 continue
 
-            mention_obj, created = Mention.objects.get_or_create_from_em(
+            mention_obj, created = Mention.objects.update_or_create_from_em(
                 mention)
             if created:
                 print("Added new mention: {0}".format(mention['title']))

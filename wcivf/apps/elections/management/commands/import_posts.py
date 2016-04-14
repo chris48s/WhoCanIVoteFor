@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     def add_posts(self, results):
         for post in results['results']:
-            post_obj, created = Post.objects.get_or_create_from_ynr(
+            post_obj, created = Post.objects.update_or_create_from_ynr(
                 post)
             if created:
                 print("Added new post: {0}".format(post['label']))

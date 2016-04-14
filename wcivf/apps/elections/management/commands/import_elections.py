@@ -17,7 +17,7 @@ class Command(BaseCommand):
 
     def add_elections(self, results):
         for election in results['results']:
-            election_obj, created = Election.objects.get_or_create_from_ynr(
+            election_obj, created = Election.objects.update_or_create_from_ynr(
                 election)
             if created:
                 print("Added new election: {0}".format(election['name']))

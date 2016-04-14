@@ -11,7 +11,7 @@ from parties.models import Party
 
 
 class PersonManager(models.Manager):
-    def get_or_create_from_ynr(self, person):
+    def update_or_create_from_ynr(self, person):
         posts = []
         elections = []
 
@@ -26,14 +26,14 @@ class PersonManager(models.Manager):
 
 
                 if membership['election']:
-                    election, _ = Election.objects.get_or_create(
+                    election, _ = Election.objects.update_or_create(
                         slug=membership['election']['id'],
                         name=membership['election']['name'],
                     )
                 elections.append(election)
 
                 if membership['post']:
-                    post, _ = Post.objects.get_or_create(
+                    post, _ = Post.objects.update_or_create(
                         ynr_id=membership['post']['id'],
                         label=membership['post']['label'],
                     )
@@ -44,7 +44,7 @@ class PersonManager(models.Manager):
                 defaults['party'] = Party.objects.get(
                     pk=person['memberships'][0]['on_behalf_of']['id'])
 
-        person_obj, _ = self.get_or_create(
+        person_obj, _ = self.update_or_create(
             ynr_id=person['id'],
             defaults=defaults
         )
@@ -67,7 +67,7 @@ class PersonManager(models.Manager):
                 # Delete old posts for this person
                 PersonPost.objects.filter(person=person_obj).delete()
 
-                PersonPost.objects.get_or_create(
+                PersonPost.objects.update_or_create(
                     post=post,
                     person=person_obj,
                     defaults={

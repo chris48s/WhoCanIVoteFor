@@ -21,7 +21,7 @@ class Command(BaseCommand):
             if not party['classification'] == "Party":
                 continue
 
-            party_obj, created = Party.objects.get_or_create_from_ynr(
+            party_obj, created = Party.objects.update_or_create_from_ynr(
                 party)
             if created:
                 print("Added new party: {0}".format(party['name']))

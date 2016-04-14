@@ -23,7 +23,7 @@ class Command(BaseCommand):
 
     def add_people(self, results):
         for person in results['results']:
-            person_obj, created = Person.objects.get_or_create_from_ynr(
+            person_obj, created = Person.objects.update_or_create_from_ynr(
                 person)
             self.seen_people.add(person['id'])
             if created:
