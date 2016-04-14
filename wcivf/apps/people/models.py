@@ -63,9 +63,6 @@ class PersonManager(models.Manager):
             ynr_id=person['id'],
             defaults=defaults
         )
-        if person_obj.wikipedia_url:
-            person_obj.wikipedia_bio = get_wikipedia_extract(person_obj)
-            person_obj.save()
 
         if person['memberships']:
             person_obj.party = Party.objects.get(
