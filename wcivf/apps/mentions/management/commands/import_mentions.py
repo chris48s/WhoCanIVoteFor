@@ -14,6 +14,8 @@ class Command(BaseCommand):
         for mention in results['stream_items']:
             if not mention['quote']:
                 continue
+            if "http://www.newstatesman.com/" in mention['url']:
+                continue
 
             mention_obj, created = Mention.objects.update_or_create_from_em(
                 mention)
