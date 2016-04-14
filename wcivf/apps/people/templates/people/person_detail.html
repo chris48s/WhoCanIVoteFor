@@ -12,11 +12,20 @@
 {% block content %}
 <section class="columns large-12">
   <div class="card">
-    <h2>
-      {% if object.photo %}
-      <img src="{% static object.photo.url %}" height="120px" width="120px">
-      {% endif %}
-      {{ object.name }}</h2>
+    <div class="row">
+      <div class="columns large-2">
+        {% if object.photo %}
+        <img src="{% static object.photo.url %}" height="120px" width="120px">
+        {% endif %}
+      </div>
+      <div class="columns large-10">
+      <h2>
+        {{ object.name }}</h2>
+        {% if object.wikipedia_bio %}
+        <p>{{ object.wikipedia_bio }} <a href="{{ object.wikipedia_url }}">Read more on Wikipedia</a></p>
+        {% endif %}
+      </div>
+    </div>
   </div>
 </section>
 
@@ -26,11 +35,57 @@
     <dl>
       {% if object.email %}
       <dt>Email</dt>
-      <dd>{{ object.email }}</dd>
+      <dd><a href="mailto:{{ object.email }}">{{ object.email }}</a></dd>
       {% else %}
       We don't know {{ object.name }}'s email address.
       <a href="https://candidates.democracyclub.org.uk/person/{{ object.ynr_id }}">Can you add it?</a>
       {% endif %}
+
+
+
+
+        {% if object.twitter_username %}
+        <dt>
+          Twitter
+        </dt>
+        <dd>
+          <a href="https://twitter.com/{{ object.twitter_username }}" title="{{ object.name }}'s Twitter profile">
+            @{{ object.twitter_username }}
+          </a>
+        </dd>
+        {% endif %}
+        {% if object.facebook_page_url %}
+        <dt>Facebook</dt>
+        <dd>
+          <a href="{{ object.facebook_page_url }}" title="{{ object.name }}'s Facebook profile">
+            {{ object.facebook_page_url }}
+          </a>
+        </dd>
+        {% endif %}
+        {% if object.linkedin_url %}
+        <dt>LinkedIn</dt>
+        <li>
+          <a href="{{ object.linkedin_url }}" title="{{ object.name }}'s LinkedIn profile">
+            {{ object.linkedin_url }}
+          </a>
+        </li>
+        {% endif %}
+        {% if object.homepage_url %}
+        <dt>Home Page</dt>
+        <dd>
+          <a href="{{ object.homepage_url }}" title="{{ object.name }}'s home page">
+            {{ object.homepage_url }}
+          </a>
+        </dd>
+        {% endif %}
+        {% if object.wikipedia_url %}
+        <dt>Wikipedia</dt>
+        <dd>
+          <a href="{{ object.wikipedia_url }}" title="{{ object.name }}'s Wikipedia page">
+            {{ object.wikipedia_url }}
+          </a>
+        </dd>
+        {% endif %}
     </dl>
   </div>
 </section>

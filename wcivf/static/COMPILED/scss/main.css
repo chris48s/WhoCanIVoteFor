@@ -7775,16 +7775,35 @@ body > header {
       height: 60px;
       border: 1px solid #CCC;
       background-color: #FFF; }
-    .candidate_card footer .expand {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      font-size: 2em;
-      border-radius: 50%;
-      background-color: #FFF;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
-      .candidate_card footer .expand i {
-        font-size: 33px; }
+    .candidate_card footer .contact_links {
+      margin: 0;
+      padding: 0; }
+      .candidate_card footer .contact_links li {
+        list-style-type: none;
+        margin: 0 0 0 0.5em;
+        padding: 0;
+        float: left; }
+        .candidate_card footer .contact_links li a {
+          display: block;
+          font-size: 0.9em;
+          padding: 0.3em;
+          color: #FFF;
+          border-radius: 50%;
+          background-color: #EFEFEF;
+          display: block;
+          height: 2em;
+          text-align: center;
+          width: 2em;
+          margin: 0.8em 0.3em;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+          .candidate_card footer .contact_links li a i {
+            color: #2A8B76; }
+          .candidate_card footer .contact_links li a.more {
+            position: absolute;
+            background-color: #FFF;
+            bottom: -2px;
+            right: 0px;
+            font-weight: bold; }
 
 #top_banner {
   background-color: #000; }
@@ -7803,5 +7822,11 @@ body > header {
     font-size: 1.3em; }
   .mentions_list .mention_item blockquote {
     color: black; }
+
+dt {
+  margin-top: 1em; }
+
+dd {
+  margin-left: 1em; }
 
 /*# sourceMappingURL=main.css.map */

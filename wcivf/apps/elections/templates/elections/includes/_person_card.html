@@ -31,8 +31,56 @@
   </header>
 
   <footer>
-    <a href="{{ person_post.person.get_absolute_url }}">
-      <i class="material-icons expand">chevron_right</i>
-    </a>
+
+    <ul class="contact_links">
+      {% if person_post.person.email %}
+      <li>
+        <a href="mailto:{{ person_post.person.email }}" title="Email {{ person_post.person.name }}">
+          <i class='fa fa-envelope'></i>
+        </a>
+      </li>
+      {% endif %}
+      {% if person_post.person.twitter_username %}
+      <li>
+        <a href="https://twitter.com/{{ person_post.person.twitter_username }}" title="{{ person_post.person.name }}'s Twitter profile">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+      {% endif %}
+      {% if person_post.person.facebook_page_url %}
+      <li>
+        <a href="{{ person_post.person.facebook_page_url }}" title="{{ person_post.person.name }}'s Facebook profile">
+          <i class='fa fa-facebook'></i>
+        </a>
+      </li>
+      {% endif %}
+      {% if person_post.person.linkedin_url %}
+      <li>
+        <a href="{{ person_post.person.linkedin_url }}" title="{{ person_post.person.name }}'s LinkedIn profile">
+          <i class='fa fa-linkedin'></i>
+        </a>
+      </li>
+      {% endif %}
+      {% if person_post.person.homepage_url %}
+      <li>
+        <a href="{{ person_post.person.homepage_url }}" title="{{ person_post.person.name }}'s home page">
+          <i class="fa fa-home"></i>
+        </a>
+      </li>
+      {% endif %}
+      {% if person_post.person.wikipedia_url %}
+      <li>
+        <a href="{{ person_post.person.wikipedia_url }}" title="{{ person_post.person.name }}'s Wikipedia page">
+          <i class="fa fa-wikipedia-w"></i>
+        </a>
+      </li>
+      {% endif %}
+      <li>
+        <a href="{{ person_post.person.get_absolute_url }}" title="{{ person_post.person.name }}'s WhoCanIVoteFor candidate page" class="more">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+
   </footer>
 </section>
