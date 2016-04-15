@@ -78,9 +78,9 @@ class PersonManager(models.Manager):
             person_obj.save()
 
         if posts:
+            # Delete old posts for this person
+            PersonPost.objects.filter(person=person_obj).delete()
             for post in posts:
-                # Delete old posts for this person
-                PersonPost.objects.filter(person=person_obj).delete()
 
                 PersonPost.objects.update_or_create(
                     post=post,
