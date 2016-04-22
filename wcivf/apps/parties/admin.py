@@ -1,3 +1,14 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Party
+
+
+class PartyAdmin(admin.ModelAdmin):
+    readonly_fields = (
+        'party_id',
+        'party_name',
+        'emblem',
+    )
+
+
+admin.site.register(Party, PartyAdmin)

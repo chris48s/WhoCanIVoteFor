@@ -2,9 +2,17 @@
 
 
 {% block content %}
-<ul>
-{% for party in object_list %}
-<li><a href="{{ party.get_absolute_url }}">{{ party.party_name }}</a></li>
-{% endfor %}
-</ul>
+<section class="columns large-12">
+  <div class="card">
+    <div class="row">
+      <h2>UK Political parties</h2>
+      <ul>
+      {% for party in object_list %}
+      <li><a href="{{ party.get_absolute_url }}">{{ party.party_name }}</a></li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
 {% endblock content %}

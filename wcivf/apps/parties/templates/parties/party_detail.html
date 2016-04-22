@@ -2,8 +2,13 @@
 
 {% load breadcrumb_tags %}
 {% load static %}
+{% load markdown_deux_tags %}
 
 {% block og_image %}{% if object.emblem %}{% static object.emblem.url %}{% endif %}{% endblock og_image %}
+{% block og_title %}{{ object.party_name }}{% endblock og_title %}
+{% block page_title %}{{ object.party_name }}{% endblock page_title %}
+{% block og_description %}{{ object.personpost_set.all.count }} candidates{% endblock og_description %}
+
 
 {% block content %}
 
@@ -20,6 +25,13 @@
       <h2>
         {{ object.party_name }}</h2>
         <p>{{ object.personpost_set.all.count }} candidates</p>
+        {% if object.description %}
+        {{ object.description|markdown }}
+        {% endif %}
+        {% if object.wikipedia_url %}
+        <p><a href="{{ object.wikipedia_url }}">Read more on wikipedia</a></p>
+        {% endif %}
+
       </div>
     </div>
   </div>
@@ -49,8 +61,6 @@
     </div>
   </div>
 </section>
-
-
 
 
 </div>

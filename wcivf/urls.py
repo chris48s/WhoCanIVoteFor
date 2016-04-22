@@ -7,11 +7,13 @@ from django.views.decorators.cache import cache_page
 
 from elections.sitemaps import ElectionSitemap, PostSitemap
 from people.sitemaps import PersonSitemap
+from parties.sitemaps import PartySitemap
 
 sitemaps = {
     'elections': ElectionSitemap,
     'posts': PostSitemap,
     'people': PersonSitemap,
+    'parties': PartySitemap,
 }
 
 urlpatterns = [

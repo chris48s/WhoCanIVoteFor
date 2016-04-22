@@ -43,6 +43,8 @@ class Party(models.Model):
     party_id = models.CharField(blank=True, max_length=100, primary_key=True)
     party_name = models.CharField(max_length=765)
     emblem = models.ImageField(upload_to="parties/emblems", null=True)
+    wikipedia_url = models.URLField(blank=True)
+    description = models.TextField(blank=True)
 
     class Meta:
         verbose_name_plural = 'Parties'
