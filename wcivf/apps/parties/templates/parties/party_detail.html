@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load breadcrumb_tags %}
+{% load static %}
+
+{% block og_image %}{% if object.emblem %}{% static object.emblem.url %}{% endif %}{% endblock og_image %}
+
+{% block content %}
+
+
+<section class="columns large-12">
+  <div class="card">
+    <div class="row">
+      <div class="columns large-2">
+        {% if object.emblem %}
+        <img src="{% static object.emblem.url %}" height="120px" width="120px">
+        {% endif %}
+      </div>
+      <div class="columns large-10">
+      <h2>
+        {{ object.party_name }}</h2>
+        <p>{{ object.personpost_set.all.count }} candidates</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="columns large-12">
+  <div class="card">
+    <div class="row">
+
+      {% regroup object.personpost_set.all.counts_by_post by post__election__name as people_by_election %}
+
+      {% for election in people_by_election %}
+      <h4>{{ election.grouper }}</h4>
+      {% for post in election.list %}
+        <dl>
+          <dt>
+            <a href="{% url 'post_view' post.post__election__slug post.post_id post.post__label|slugify %}">
+              {{ post.post__label }}
+            </a>
+          </dt>
+          <dd>
+            {{ post.num_candidates }} candidate
+          </dd>
+        </dl>
+      {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+
+
+</div>
+{% endblock content %}
+
+
+{% block breadcrumbs %}
+<ol vocab="http://schema.org/" typeof="BreadcrumbList" class="breadcrumbs" aria-label="You are here:" role="navigation">
+  {% url 'home_view' as home_view %}
+  {% breadcrumb_item home_view 'Home' 1 %}
+  {% url 'parties_view' as parties %}
+  {% breadcrumb_item parties 'Parties' 2 %}
+  <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.party_name }}</li>
+</ol>
+
+{% endblock breadcrumbs %}

@@ -1,6 +1,7 @@
 import requests
 
 from django.db import models
+from django.db.models import Count
 from django.core.files import File
 
 from django.core.files.temp import NamedTemporaryFile
@@ -12,7 +13,13 @@ from parties.models import Party
 
 class PersonPostQuerySet(models.QuerySet):
     def by_party(self):
-        return self.order_by('person__party__party_name')
+        return self.order_by('person__party__party_name', 'list_position')
+
+    def counts_by_post(self):
+        return self.values(
+            'person', 'post__label', 'post_id', 'post__election__name','post__election__slug',)\
+            .annotate(num_candidates=Count('person'))\
+            .order_by('post__election__name', 'post__label', '-num_candidates')
 
 
 class PersonPostManager(models.Manager):
@@ -21,6 +28,9 @@ class PersonPostManager(models.Manager):
 
     def by_party(self):
         return self.get_queryset().by_party()
+
+    def counts_by_post(self):
+        return self.get_queryset().counts_by_post()
 
 
 class PersonManager(models.Manager):

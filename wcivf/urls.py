@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('core.urls')),
     url(r'^elections/', include('elections.urls')),
+    url(r'^parties/', include('parties.urls')),
     url(r'^person/', include('people.urls')),
     url(r'^sitemap\.xml$', cache_page(86400)(sitemap), {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap')

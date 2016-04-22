@@ -1,9 +1,11 @@
 import requests
 
+from django.conf import settings
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
+from django.core.urlresolvers import reverse
 from django.db import models
-from django.conf import settings
+from django.utils.text import slugify
 
 
 class PartyManager(models.Manager):
@@ -50,3 +52,9 @@ class Party(models.Model):
 
     def __str__(self):
         return "%s (%s)" % (self.party_name, self.pk)
+
+    def get_absolute_url(self):
+        return reverse('party_view', args=[
+            str(self.pk),
+            slugify(self.party_name)
+        ])
