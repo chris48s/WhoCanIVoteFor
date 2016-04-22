@@ -1,4 +1,4 @@
-{% regroup people by person.party.party_name as people_by_party %}
+{% regroup people.by_party by person.party.party_name as people_by_party %}
 
 {% for person_post in people_by_party %}
   <div class="party_list_row">
