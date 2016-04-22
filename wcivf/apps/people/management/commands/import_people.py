@@ -3,7 +3,7 @@ from django.conf import settings
 
 import requests
 
-from people.models import Person
+from people.models import Person, PersonPost
 
 
 class Command(BaseCommand):
@@ -28,3 +28,4 @@ class Command(BaseCommand):
             self.seen_people.add(person['id'])
             if created:
                 print("Added new person: {0}".format(person['name']))
+        PersonPost.objects.filter(party=None).delete()
