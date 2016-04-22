@@ -11,6 +11,7 @@ from .managers import PersonPostManager, PersonManager
 class PersonPost(models.Model):
     person = models.ForeignKey('Person')
     post = models.ForeignKey(Post)
+    party = models.ForeignKey(Party, null=True)
     list_position = models.IntegerField(blank=True, null=True)
     objects = PersonPostManager()
 

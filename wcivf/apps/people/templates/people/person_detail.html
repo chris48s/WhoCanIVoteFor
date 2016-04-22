@@ -96,8 +96,8 @@
     {% if object.current_posts %}
       <p>{{ object.name }} is a candidate in the following upcoming elections:</p>
       <ul>
-      {% for post in object.current_posts %}
-        <li><strong>{{ post.label }}</strong>: {{ post.election }}</li>
+      {% for person_post in object.current_posts %}
+        <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.post.election }}, {{ person_post.party.party_name }}</li>
       {% endfor %}
       </ul>
     {% endif %}
@@ -105,9 +105,8 @@
     {% if object.past_posts %}
       <p>{{ object.name }} previously stood in the following elections:</p>
       <ul>
-      {% for post in object.past_posts %}
-        <li><strong>{{ post.label }}</strong>: {{ post.election }}</li>
-
+      {% for person_post in object.past_posts %}
+        <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.post.election }}, {{ person_post.party.party_name }}</li>
       {% endfor %}
       </ul>
     {% endif %}

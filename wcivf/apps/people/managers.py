@@ -59,7 +59,7 @@ class PersonManager(models.Manager):
                         slug=membership['election']['id'],
                         name=membership['election']['name'],
                     )
-                elections.append(election)
+                    elections.append(election)
 
                 if membership['post']:
                     post, _ = Post.objects.update_or_create(
@@ -67,6 +67,10 @@ class PersonManager(models.Manager):
                         label=membership['post']['label'],
                     )
                 post.party_list_position = membership['party_list_position']
+                if membership['on_behalf_of']:
+                    post.party_id = membership['on_behalf_of']['id']
+                else:
+                    post.party_id = None
                 posts.append(post)
 
             if person['memberships'][0]['on_behalf_of']:
@@ -96,13 +100,15 @@ class PersonManager(models.Manager):
             # Delete old posts for this person
             PersonPost.objects.filter(person=person_obj).delete()
             for post in posts:
-
+                defaults = {
+                    'list_position': post.party_list_position
+                }
+                if post.party_id:
+                    defaults['party'] = Party.objects.get(party_id=post.party_id)
                 PersonPost.objects.update_or_create(
                     post=post,
                     person=person_obj,
-                    defaults={
-                        'list_position': post.party_list_position,
-                    }
+                    defaults=defaults
                 )
         if elections:
             person_obj.elections.add(*elections)

@@ -1,7 +1,7 @@
 from django.views.generic import DetailView
 from django.http import Http404
 
-from .models import Person
+from .models import Person, PersonPost
 
 
 class PersonView(DetailView):
@@ -18,6 +18,7 @@ class PersonView(DetailView):
         except queryset.model.DoesNotExist:
             raise Http404("No %(verbose_name)s found matching the query" %
                           {'verbose_name': queryset.model._meta.verbose_name})
-        obj.current_posts = obj.posts.filter(personpost__post__election__current=True)
-        obj.past_posts = obj.posts.filter(personpost__post__election__current=False)
+
+        obj.current_posts = PersonPost.objects.filter(person=obj, post__election__current=True)
+        obj.past_posts = PersonPost.objects.filter(person=obj, post__election__current=False)
         return obj

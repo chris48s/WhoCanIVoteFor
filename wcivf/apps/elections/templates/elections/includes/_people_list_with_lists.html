@@ -1,4 +1,4 @@
-{% regroup people.by_party by person.party.party_name as people_by_party %}
+{% regroup people.by_party by party.party_name as people_by_party %}
 
 {% for person_post in people_by_party %}
   <div class="party_list_row">
@@ -6,8 +6,8 @@
       <div class="card">
         <div class="row">
           <div class="columns large-3">
-            {% if person_post.list.0.person.party.emblem %}
-            <img src="{{ person_post.list.0.person.party.emblem.url }}" width="70px" height="70px">
+            {% if person_post.list.0.party.emblem %}
+            <img src="{{ person_post.list.0.party.emblem.url }}" width="70px" height="70px">
             {% endif %}
           </div>
           <div class="columns large-9">
