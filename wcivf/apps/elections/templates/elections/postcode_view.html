@@ -36,7 +36,7 @@
   </div>
 </section>
 
-{% if polling_station.polling_station_known %}
+{% if polling_station.polling_station_known or polling_station.custom_finder%}
 {# Add this at the top of the page if it's known, or at the bottom if it's not #}
 {% include "elections/includes/_polling_place.html" %}
 {% endif %}
@@ -100,7 +100,7 @@
     {% endfor %}
   </div>
 </section>
-{% if not polling_station.polling_station_known %}
+{% if not polling_station.polling_station_known and not polling_station.custom_finder%}
 {# Add this at the top of the page if it's known, or at the bottom if it's not #}
 {% include "elections/includes/_polling_place.html" %}
 {% endif %}
