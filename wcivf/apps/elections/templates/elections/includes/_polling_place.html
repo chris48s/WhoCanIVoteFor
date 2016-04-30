@@ -14,26 +14,26 @@
         <p><a href="http://pollingstations.democracyclub.org.uk/postcode/{{ postcode }}">
           Get walking directions from {{ postcode }}</a></p>
         {% else %}
-        {% if polling_station.custom_finder %}
-          <p>You should get a "poll card" through the post telling you where to vote.</p>
-          {% if polling_station.custom_finder.can_pass_postcode %}
-          <p>You can find your polling station by
-            <a href="{{ polling_station.custom_finder.base_url}}{{polling_station.custom_finder.encoded_postcode}}">
-              following this link</a>
-          {% else %}
-          <p>You can find your polling station by
-            <a href="{{ polling_station.custom_finder.base_url}}">following this link and entering your postcode</a>
-          {% endif %}
-          </p>
-        {% else %}
-          <p>If you haven't got one, or aren't sure where to vote, you should call
-            {{ polling_station.council.name }} on <a href="tel:{{ polling_station.council.phone }}">
-              {{ polling_station.council.phone }}</a></p>
-        {% endif %}
+            {% if polling_station.custom_finder %}
+              {% if polling_station.custom_finder.can_pass_postcode %}
+              <p>You can find your polling station by
+                <a href="{{ polling_station.custom_finder.base_url}}{{polling_station.custom_finder.encoded_postcode}}">
+                  following this link</a>
+              {% else %}
+              <p>You can find your polling station by
+                <a href="{{ polling_station.custom_finder.base_url}}">following this link and entering your postcode</a>
+              {% endif %}
+              </p>
+            {% else %}
+            <p>You should get a "poll card" through the post telling you where to vote.</p>
+              <p>If you haven't got one, or aren't sure where to vote, you should call
+                {{ polling_station.council.name }} on <a href="tel:{{ polling_station.council.phone }}">
+                  {{ polling_station.council.phone }}</a></p>
+            {% endif %}
         {% endif %}
 
       </div>
-      {% if not polling_station.custom_finder %}
+      {% if not polling_station.custom_finder and polling_station.polling_station_known %}
       <div class="columns large-6">
         <div id="area_map" style="height:400px;"></div>
       </div>
@@ -42,10 +42,7 @@
 
     <div style="clear:both"></div>
 
-
-
-
-    {% if not polling_station.custom_finder %}
+    {% if not polling_station.custom_finder and polling_station.polling_station_known %}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
 
@@ -76,8 +73,6 @@
 
         map.setView(polling_station_location,15);
       };
-
-
 
       var polling_station_point = [
         {{ polling_station.polling_station.location.latitude }},
