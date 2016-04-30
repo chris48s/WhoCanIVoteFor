@@ -68,3 +68,4 @@ wcivf/settings/local.py
 wcivf/media/
 wcivf/assets/.sass-cache
 wcivf/static_root/
+*~
