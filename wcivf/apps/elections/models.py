@@ -27,7 +27,8 @@ class Election(models.Model):
     uses_lists = models.BooleanField(default=False)
     voter_age = models.CharField(blank=True, max_length=100)
     voter_citizenship = models.TextField(blank=True)
-
+    for_post_role = models.TextField(blank=True)
+    
     objects = ElectionManager()
 
     class Meta:
@@ -102,6 +103,10 @@ class Post(models.Model):
                 str(self.ynr_id),
                 slugify(self.label)
             ])
+
+
+    def friendly_name(self):
+        return "{} for {}".format(self.election.for_post_role, self.area_name)
 
 
 class VotingSystem(models.Model):

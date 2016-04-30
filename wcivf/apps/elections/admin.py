@@ -7,6 +7,11 @@ class ElectionAdmin(admin.ModelAdmin):
     list_filter = ('election_type', 'voting_system')
 
 
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('area_name', 'role')
+    list_filter = ('organization', 'role')
+
+
 admin.site.register(Election, ElectionAdmin)
-admin.site.register(Post)
+admin.site.register(Post, PostAdmin)
 admin.site.register(VotingSystem)
