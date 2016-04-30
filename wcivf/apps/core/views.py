@@ -7,8 +7,7 @@ from django.core.urlresolvers import reverse
 from .forms import PostcodeLookupForm
 
 
-class HomePageView(FormView):
-    template_name = "home.html"
+class PostcodeFormView(FormView):
     form_class = PostcodeLookupForm
 
     def form_valid(self, form):
@@ -19,3 +18,6 @@ class HomePageView(FormView):
         )
         return super().form_valid(form)
 
+
+class HomePageView(PostcodeFormView):
+    template_name = "home.html"
