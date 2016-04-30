@@ -7615,6 +7615,10 @@ h1, h2, h3 {
     margin: -20px;
     margin-top: 20px;
     background-color: #9e9e9e; }
+  @media screen and (max-width: 39.9375em) {
+    .card {
+      margin-left: -15px;
+      margin-right: -15px; } }
 
 .raised-button, .raised-accent-button, .flat-button, .disabled-button {
   min-width: 64px;
@@ -7623,24 +7627,31 @@ h1, h2, h3 {
   padding-right: 1rem; }
 
 body > header {
-  background-color: #2c3e50; }
+  background-color: white; }
   body > header img {
     float: left;
-    margin-right: 1em; }
+    margin: 1rem;
+    height: 60px; }
   body > header h1 {
-    color: white;
-    line-height: 90px;
-    margin: 0;
-    padding: 0; }
+    color: black;
+    height: 60px;
+    line-height: 60px;
+    margin: 1rem;
+    padding: 0;
+    letter-spacing: -0.1rem;
+    text-rendering: geometricPrecision;
+    font-size: 2.5rem; }
     body > header h1 a {
-      color: white;
-      font-size: 0.8em; }
+      color: black; }
+    @media screen and (max-width: 39.9375em) {
+      body > header h1 {
+        font-size: 1.9rem; } }
 
 .footer {
   color: white;
-  background-color: #2c3e50;
+  background-color: #67737F;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
   padding: 1rem;
   margin-top: 5em; }
   .footer .social a {
@@ -7682,6 +7693,9 @@ body > header {
   margin-top: 1em; }
   .breadcrumbs li {
     font-size: 1rem; }
+
+body {
+  background: #eee; }
 
 .party_list_row {
   overflow: scroll;
@@ -7805,15 +7819,17 @@ body > header {
             right: 0px;
             font-weight: bold; }
 
-#top_banner {
-  background-color: #000; }
-  #top_banner p {
+#bottom_banner {
+  margin-top: 2rem; }
+  #bottom_banner p {
     margin: 0;
     line-height: 2em;
-    color: white; }
-    #top_banner p a {
+    color: #666;
+    text-align: center;
+    background: #ddd; }
+    #bottom_banner p a {
       font-weight: bold;
-      color: white;
+      color: #666;
       text-decoration: underline; }
 
 .mentions_list .mention_item {
@@ -7822,6 +7838,36 @@ body > header {
     font-size: 1.3em; }
   .mentions_list .mention_item blockquote {
     color: black; }
+
+@font-face {
+  font-family: 'Mono Social Icons Font';
+  src: url('/static/fonts/MonoSocialIconsFont-1.10.eot');
+  src: url('/static/fonts/MonoSocialIconsFont-1.10.eot?#iefix') format("embedded-opentype"), url('/static/fonts/MonoSocialIconsFont-1.10.woff') format("woff"), url('/static/fonts/MonoSocialIconsFont-1.10.ttf') format("truetype"), url('/static/fonts/MonoSocialIconsFont-1.10.svg#MonoSocialIconsFont') format("svg");
+  src: url('/static/fonts/MonoSocialIconsFont-1.10.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+.symbol, a.symbol:before {
+  font-family: 'Mono Social Icons Font';
+  -webkit-text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  -ms-text-rendering: optimizeLegibility;
+  -o-text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased; }
+
+a.symbol:before {
+  content: attr(title);
+  margin-right: 0.3em;
+  font-size: 130%; }
+
+a.material-icons:before {
+  content: attr(title);
+  margin-right: 0.3em;
+  font-size: 130%; }
 
 dt {
   margin-top: 1em; }
