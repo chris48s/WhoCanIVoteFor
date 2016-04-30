@@ -7,8 +7,10 @@
 {% block content %}
 <section class="columns large-6 large-centered">
   <div style="margin-top:2rem;">
-    <p><strong>Everyone in the UK</strong> has an election on 5 May 2016.</p>
-    <p>Find out about the elections you can vote in by entering your postcode below.</p>
+    {% block pre_post_code_copy %}
+      <p><strong>Everyone in the UK</strong> has an election on 5 May 2016.</p>
+      <p>Find out about the elections you can vote in by entering your postcode below.</p>
+    {% endblock %}
   </div>
 
   <div class="card postcode_card">
@@ -18,6 +20,13 @@
       <button type="submit" class="button">Search</button>
     </form>
   </div>
+
+  <div style="margin-top:2rem;">
+    {% block post_post_code_copy %}
+    {% endblock %}
+  </div>
+
+
 </section>
 
 {% endblock content %}
