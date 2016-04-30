@@ -182,26 +182,20 @@ body {
 }
 
 
-
-
-
-
-
-
-
-#top_banner {
-  background-color: #000;
+#bottom_banner {
+  margin-top: 2rem;
 
   p {
     margin:0;
     line-height:2em;
-    color:$white;
+    color: #666;
     text-align: center;
+    background: #ddd;
 
     a {
-      font-weight:bold;
-      color:$white;
-      text-decoration:underline;
+      font-weight: bold;
+      color: #666;
+      text-decoration: underline;
     }
   }
 }

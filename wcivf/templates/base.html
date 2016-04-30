@@ -32,14 +32,14 @@
     <link rel="stylesheet" href="{% static "scss/main.scss"|compile %}?{{ REVISION }}" />{% endif %}
 {% endblock extra_site_css %}
 
-{% block top_banner %}
-<div id="top_banner">
+{% block bottom_banner %}
+<div id="bottom_banner">
   <div class="row">
-    <div class="columns large-12">
-      <p><strong>BETA</strong>: This web site is new, <a href="{% url 'about_view' %}#contact">we'd love to hear your feedback</a>.</p>
+    <div class="columns large-6 large-centered">
+      <p><strong>BETA</strong>: This is a new website, <a href="{% url 'about_view' %}#contact">we'd love to hear your feedback</a>.</p>
     </div>
   </div>
-</div>{% endblock top_banner %}
+</div>{% endblock bottom_banner %}
 
 
 
