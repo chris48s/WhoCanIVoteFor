@@ -1,5 +1,8 @@
 @import 'dc_base';
 
+body {
+    background: #eee;
+}
 
 @mixin box_shadow ($level) {
     @if $level == 1 {
@@ -193,6 +196,8 @@
     margin:0;
     line-height:2em;
     color:$white;
+    text-align: center;
+
     a {
       font-weight:bold;
       color:$white;
