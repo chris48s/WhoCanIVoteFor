@@ -7605,6 +7605,8 @@ h1, h2, h3 {
   background: white; }
   .card .card_header {
     font-size: 2em; }
+  .card .card_subheader {
+    font-size: 1.2em; }
   .card .link-icon i {
     margin-top: 7px; }
   .card .bottom-button {
