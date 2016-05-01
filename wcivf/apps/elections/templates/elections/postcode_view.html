@@ -63,9 +63,11 @@
       </div>
     </div>
       {% for post in election_group.list %}
-      <div id="election_{{ post.election.slug }}" class="card" {# style="background-color:{{ post.election.ballot_colour }}" #}>
+      <div id="election_{{ post.election.slug }}" class="card">
+        {% if post.election.ballot_colour %}<div style="margin:-20px -20px 10px -20px; padding: 20px; background-color:{{ post.election.ballot_colour }};">{% endif %}
         <h2 class="card_header">{{ post.friendly_name }}</h2>
         <h3 class="card_subheader">{{ post.election.name }}</h3>
+        {% if post.election.ballot_colour %}</div>{% endif %}
 
         {{ post.election.description|markdown }}
 
