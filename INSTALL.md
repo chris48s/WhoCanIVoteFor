@@ -19,3 +19,15 @@ the cache backend with a file at `./wcivf/settings/local.py` with the following:
                    'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
                       }
              }
+
+
+## Creating inline CSS
+
+The CSS for this project is inlined in the base template for performance reasons.
+
+This is created using [`critical`](https://github.com/addyosmani/critical), and can be re-created by running
+
+```
+curl localhost:8000 | critical --base wcivf -m > wcivf/templates/_compressed_css.html
+```
+
