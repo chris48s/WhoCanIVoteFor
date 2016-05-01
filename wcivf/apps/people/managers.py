@@ -86,19 +86,10 @@ class PersonManager(models.Manager):
                     post.party_id = None
                 posts.append(post)
 
-            if person['memberships'][0]['on_behalf_of']:
-                defaults['party'] = Party.objects.get(
-                    pk=person['memberships'][0]['on_behalf_of']['id'])
-
         person_obj, _ = self.update_or_create(
             ynr_id=person['id'],
             defaults=defaults
         )
-
-        if person['memberships']:
-            person_obj.party = Party.objects.get(
-                pk=person['memberships'][0]['on_behalf_of']['id'])
-            person_obj.save()
 
         if person['thumbnail']:
             img_temp = NamedTemporaryFile(delete=True)
