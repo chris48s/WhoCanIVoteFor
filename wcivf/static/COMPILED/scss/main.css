@@ -7705,6 +7705,20 @@ body {
   .party_list_row .party_list_row_inner {
     width: 2000%; }
 
+.card table thead {
+  background: #E6E6E6; }
+  .card table thead td {
+    font-weight: normal; }
+.card table tbody, .card table thead {
+  border: 0; }
+  .card table tbody tr:nth-child(even), .card table thead tr:nth-child(even) {
+    background-color: #f7f7f7; }
+
+.next_election h2 {
+  color: #666; }
+  .next_election h2 span.postcode {
+    color: #222; }
+
 .party_card {
   width: 400px;
   float: left;

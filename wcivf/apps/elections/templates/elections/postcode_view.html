@@ -17,16 +17,28 @@
 </section>-->
 
 <section class="columns large-6">
-  <div class="card">
-    <h2 class="card_header">Next election{{ posts.count|pluralize }} in {{ postcode }}</h2>
-    <h3>{{ elections.0.election_date }}</h3>
-    <p>On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_date }}, registered voters will be able to vote in {{ posts.count|apnumber }} election{{ posts.count|pluralize }}:</p>
-    <ul>
+  <div class="card next_election">
+    <h2 class="card_header">Next election{{ posts.count|pluralize }} in <span class="postcode">{{ postcode }}</span></h2>
+    <p>
+        {% if posts.count == 0 %}
+            We don't know of any upcoming elections.
+        {% elif posts.count == 1 %}
+            Your next election is {{ posts.0.election.friendly_day }}.
+        {% else %}
+            Your next elections are {{ posts.0.election.friendly_day }}.
+        {% endif %}
+    </p>
+    <table>
+      <thead>
+        <tr><td>{{ posts.0.election.election_date|date:"l j F Y" }}</td></tr>
+      </thead>
+      <tbody>
       {% for post in posts %}
-        <li><a href="#election_{{ post.election.slug }}">{{ post.election }}</a></li>
+        <tr><td><a href="#election_{{ post.election.slug }}">{{ post.election }}</a></td></tr>
       {% endfor %}
-    </ul>
-    <p>This means you will need to visit your polling station and fill out {{ posts.count }} ballot paper{{ posts.count|pluralize }}.</p>
+      </tbody>
+    </table>
+    <p>This means you can visit your polling station and fill out <strong>{{ posts.count|apnumber }}</strong> ballot paper{{ posts.count|pluralize }}. You must be registered in order to vote.</p>
   </div>
 </section>
 
