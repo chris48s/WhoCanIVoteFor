@@ -13,14 +13,12 @@
 <section class="columns large-12">
   <div class="card">
     <div class="row">
-      <div class="columns large-2">
+      <div class="columns large-12 person_banner">
+        <button class="button person_edit"><a href="{{ object.get_ynr_url }}">edit details</a></button>
         {% if object.photo %}
-        <img src="{% static object.photo.url %}" height="120px" width="120px">
+        <img src="{% static object.photo.url %}" class="person_photo">
         {% endif %}
-      </div>
-      <div class="columns large-10">
-      <h2>
-        {{ object.name }}</h2>
+        <h2 class="person_name">{{ object.name }}</h2>
         {% if object.wikipedia_bio %}
         <p>{{ object.wikipedia_bio }} <a href="{{ object.wikipedia_url }}">Read more on Wikipedia</a></p>
         {% endif %}
