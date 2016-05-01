@@ -34,7 +34,7 @@ class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
         people_for_post = people_for_post.select_related('person')
 
         if post.election.uses_lists:
-            order_by = ['person__party__party_name', 'list_position']
+            order_by = ['party__party_name', 'list_position']
         else:
             order_by = ['person__name']
 
