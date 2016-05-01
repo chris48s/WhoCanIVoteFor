@@ -40,6 +40,21 @@ class Election(models.Model):
     def in_past(self):
         return self.election_date < datetime.date.today()
 
+    def friendly_day(self):
+        delta = self.election_date - datetime.date.today()
+
+        if delta.days < 0:
+            if delta.days > -5:
+                return "{} days ago ({})".format(delta.days, self.election_date.strftime("%A %-d %B %Y"))
+            else:
+                return "on {}".format(self.election_date)
+        else:
+            if delta.days < 7:
+                return "in {} days ({})".format(delta.days, self.election_date.strftime("%A %-d %B %Y"))
+            else:
+                return "on {}".format(self.election_date)
+            
+
     @property
     def nice_election_name(self):
         if self.election_type == "local":

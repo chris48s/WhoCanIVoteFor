@@ -13,6 +13,7 @@ class Command(BaseCommand):
 
         next_page = settings.YNR_BASE + '/api/v0.9/persons/?page_size=200'
         while next_page:
+            print(next_page)
             req = requests.get(next_page)
             results = req.json()
             self.add_people(results)

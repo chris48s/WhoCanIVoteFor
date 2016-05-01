@@ -7,7 +7,7 @@ class ElectionManager(models.Manager):
             slug=election['id'],
             defaults={
                 'election_date': election['election_date'],
-                'name': election['name'],
+                'name': election['name'].replace('2016', '').strip(),
                 'current': election['current'],
                 'description': election['description'],
                 'election_type': self.election_id_to_type(election['id']),
