@@ -35,7 +35,6 @@ class Person(models.Model):
     wikipedia_url = models.CharField(blank=True, null=True, max_length=800)
     wikipedia_bio = models.TextField(null=True)
 
-    party = models.ForeignKey(Party, null=True)
     posts = models.ManyToManyField(Post, through=PersonPost)
     elections = models.ManyToManyField(Election)
 
