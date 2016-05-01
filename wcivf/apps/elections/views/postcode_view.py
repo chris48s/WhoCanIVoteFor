@@ -30,7 +30,10 @@ class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
         if people_for_post:
             return people_for_post
 
-        people_for_post = PersonPost.objects.filter(post=post)
+        people_for_post = PersonPost.objects.filter(
+            post=post,
+            election=post.election
+            )
         people_for_post = people_for_post.select_related('person')
 
         if post.election.uses_lists:

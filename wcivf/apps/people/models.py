@@ -12,6 +12,7 @@ class PersonPost(models.Model):
     person = models.ForeignKey('Person')
     post = models.ForeignKey(Post)
     party = models.ForeignKey(Party, null=True)
+    election = models.ForeignKey(Election, null=True)
     list_position = models.IntegerField(blank=True, null=True)
     objects = PersonPostManager()
 

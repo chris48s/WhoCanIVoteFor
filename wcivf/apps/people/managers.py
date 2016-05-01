@@ -63,12 +63,11 @@ class PersonManager(models.Manager):
 
         if person['memberships']:
             for membership in person['memberships']:
+                election = None
 
                 if membership['election']:
-                    election, _ = Election.objects.update_or_create(
-                        slug=membership['election']['id'],
-                        name=membership['election']['name'],
-                    )
+                    election = Election.objects.get(
+                        slug=membership['election']['id'])
                     elections.append(election)
 
                 if membership['post']:
@@ -76,7 +75,11 @@ class PersonManager(models.Manager):
                         ynr_id=membership['post']['id'],
                         label=membership['post']['label'],
                     )
+                    if election:
+                        post.election = election
+
                 post.party_list_position = membership['party_list_position']
+
                 if membership['on_behalf_of']:
                     post.party_id = membership['on_behalf_of']['id']
                 else:
@@ -114,9 +117,12 @@ class PersonManager(models.Manager):
                     'list_position': post.party_list_position
                 }
                 if post.party_id:
-                    defaults['party'] = Party.objects.get(party_id=post.party_id)
+                    defaults['party'] = Party.objects.get(
+                        party_id=post.party_id)
+
                 PersonPost.objects.update_or_create(
                     post=post,
+                    election=post.election,
                     person=person_obj,
                     defaults=defaults
                 )

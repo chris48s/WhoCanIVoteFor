@@ -1,6 +1,8 @@
 from django.views.generic import TemplateView, DetailView
 from django.http import Http404
 
+
+from people.helpers import peopleposts_for_election_post
 from ..models import Election, Post
 
 
@@ -55,3 +57,12 @@ class PostView(DetailView):
             raise Http404("No %(verbose_name)s found matching the query" %
                           {'verbose_name': queryset.model._meta.verbose_name})
         return obj
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['election'] = Election.objects.get(slug=self.kwargs['pk'])
+        context['person_posts'] = peopleposts_for_election_post(
+            election=context['election'],
+            post=self.object
+        )
+        return context

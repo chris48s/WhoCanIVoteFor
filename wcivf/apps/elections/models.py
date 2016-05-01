@@ -28,7 +28,7 @@ class Election(models.Model):
     voter_age = models.CharField(blank=True, max_length=100)
     voter_citizenship = models.TextField(blank=True)
     for_post_role = models.TextField(blank=True)
-    
+
     objects = ElectionManager()
 
     class Meta:
@@ -53,7 +53,7 @@ class Election(models.Model):
                 return "in {} days ({})".format(delta.days, self.election_date.strftime("%A %-d %B %Y"))
             else:
                 return "on {}".format(self.election_date)
-            
+
 
     @property
     def nice_election_name(self):
