@@ -232,6 +232,27 @@ body {
 }
 
 
+.person_banner {
+    button.person_edit {
+        float: right;
+
+        a:link, a:visited {
+            color: white;
+        }
+    }
+
+    img.person_photo {
+        height: 120px;
+        float: left;
+        margin-right: 20px;
+    }
+
+    h2.person_name {
+
+    }
+}
+
+
 .mentions_list {
   .mention_item {
     margin-bottom:3em;

@@ -2,6 +2,8 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils.text import slugify
 
+from wcivf import settings
+
 from elections.models import Election, Post
 from parties.models import Party
 
@@ -50,3 +52,7 @@ class Person(models.Model):
                 str(self.ynr_id),
                 slugify(self.name)
             ])
+
+    def get_ynr_url(self):
+        return "{}/person/{}/".format(settings.YNR_BASE, self.ynr_id)
+
