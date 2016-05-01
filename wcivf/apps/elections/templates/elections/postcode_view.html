@@ -18,7 +18,7 @@
 
 <section class="columns large-6">
   <div class="card next_election">
-    <h2 class="card_header">Next election{{ posts.count|pluralize }} in <span class="postcode">{{ postcode }}</span></h2>
+    <h2 class="card_header"><span class="postcode">{{ postcode }}</span></h2>
     <p>
         {% if posts.count == 0 %}
             We don't know of any upcoming elections.
