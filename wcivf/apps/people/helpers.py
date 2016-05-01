@@ -2,6 +2,8 @@ from urllib.parse import urlencode
 
 import requests
 
+from .models import PersonPost
+
 
 def get_wikipedia_extract(person):
     """
@@ -33,3 +35,7 @@ def get_wikipedia_extract(person):
         first_para = None
 
     return first_para
+
+
+def peopleposts_for_election_post(election, post):
+    return PersonPost.objects.filter(election=election, post=post)
