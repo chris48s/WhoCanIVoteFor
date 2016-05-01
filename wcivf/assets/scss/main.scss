@@ -236,7 +236,7 @@ body {
     button.person_edit {
         float: right;
 
-        a:link {
+        a:link, a:visited {
             color: white;
         }
     }
