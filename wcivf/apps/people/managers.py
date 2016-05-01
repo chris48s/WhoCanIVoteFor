@@ -13,7 +13,7 @@ from parties.models import Party
 
 class PersonPostQuerySet(models.QuerySet):
     def by_party(self):
-        return self.order_by('person__party__party_name', 'list_position')
+        return self.order_by('party__party_name', 'list_position')
 
     def counts_by_post(self):
         return self.values(
