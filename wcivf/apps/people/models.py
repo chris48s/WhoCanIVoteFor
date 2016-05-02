@@ -18,6 +18,14 @@ class PersonPost(models.Model):
     list_position = models.IntegerField(blank=True, null=True)
     objects = PersonPostManager()
 
+    def __str__(self):
+        return "{} ({}, {})".format(
+            self.person.name,
+            self.post.label,
+            self.election.slug
+        )
+
+
 
 class Person(models.Model):
     ynr_id = models.CharField(max_length=255, db_index=True)
