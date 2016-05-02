@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load markdown_deux_tags %}
 
 
 {% block og_image %}{% if object.photo %}{% static object.photo.url %}{% endif %}{% endblock og_image %}
@@ -87,6 +88,25 @@
     </dl>
   </div>
 </section>
+
+{% if object.personpost_set.all.0.profile %}
+<section class="columns large-12">
+  <div class="card">
+    <h3>Personal statement</h3>
+    {% for personpost  in object.personpost_set.all %}
+      {% if personpost.profile %}
+        <h4>{{ personpost.election.name }}</h4>
+        {% if request.user.is_staff %}
+        <a href="/admin/profiles/profile/{{ personpost.profile.pk }}/change/" class="button alert tiny">Edit</a>
+        {% endif %}
+        {{ personpost.profile.text|markdown|urlize }}
+        <a href="{{ personpost.profile.url }}" class="small">source</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
 
 <section class="columns large-12">
   <div class="card">
