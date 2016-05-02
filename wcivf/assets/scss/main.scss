@@ -20,11 +20,7 @@ body {
 
 
 .party_list_row {
-  overflow:scroll;
   clear:right;
-  .party_list_row_inner {
-    width:2000%;
-  }
 }
 // Cards
 .card {
@@ -92,10 +88,8 @@ body {
   float: left;
   width: 40%;
 
-//  &.candidate_card_list_candidate {
-//    width:255px;
-//  }
   @include breakpoint(medium down) {
+<<<<<<< HEAD
     float: none;
     width: initial;
     margin: 0 -10px 10px -10px;
@@ -108,6 +102,20 @@ body {
 
   &.candidate_card_list_candidate {
     height: 13rem;
+=======
+    width:95%;
+    height:260px;
+
+    &.candidate_card_list_candidate {
+        width: 40%;
+    }
+  }
+  
+  @include breakpoint(small down) {
+    &.candidate_card_list_candidate {
+        width: 95%;
+    }
+>>>>>>> Remove large party list scrollbar
   }
 
   header {
