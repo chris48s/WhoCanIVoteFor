@@ -7605,6 +7605,8 @@ h1, h2, h3 {
   background: white; }
   .card .card_header {
     font-size: 2em; }
+  .card .card_subheader {
+    font-size: 1.2em; }
   .card .link-icon i {
     margin-top: 7px; }
   .card .bottom-button {
@@ -7645,7 +7647,7 @@ body > header {
       color: black; }
     @media screen and (max-width: 39.9375em) {
       body > header h1 {
-        font-size: 1.9rem; } }
+        font-size: 1.8rem; } }
 
 .footer {
   color: white;
@@ -7698,10 +7700,7 @@ body {
   background: #eee; }
 
 .party_list_row {
-  overflow: scroll;
   clear: right; }
-  .party_list_row .party_list_row_inner {
-    width: 2000%; }
 
 .card table thead {
   background: #E6E6E6; }
@@ -7748,7 +7747,10 @@ body {
       width: 95%;
       height: 260px; }
       .candidate_card.candidate_card_list_candidate {
-        width: 110px; } }
+        width: 40%; } }
+  @media screen and (max-width: 39.9375em) {
+    .candidate_card.candidate_card_list_candidate {
+      width: 95%; } }
   .candidate_card header .candidate_info {
     position: absolute;
     top: 1.5em;
