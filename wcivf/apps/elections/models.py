@@ -28,6 +28,7 @@ class Election(models.Model):
     voter_age = models.CharField(blank=True, max_length=100)
     voter_citizenship = models.TextField(blank=True)
     for_post_role = models.TextField(blank=True)
+    election_weight = models.IntegerField(default=10)
 
     objects = ElectionManager()
 

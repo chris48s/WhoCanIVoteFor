@@ -64,7 +64,10 @@ class PostcodeToPostsMixin(object):
         posts = Post.objects.filter(ynr_id__in=all_posts)
         posts = posts.select_related('election')
         posts = posts.select_related('election__voting_system')
-        posts = posts.order_by('election__uses_lists')
+        posts = posts.order_by(
+            'election__election_date',
+            'election__election_weight'
+        )
         return posts
 
 
