@@ -7605,8 +7605,6 @@ h1, h2, h3 {
   background: white; }
   .card .card_header {
     font-size: 2em; }
-  .card .card_subheader {
-    font-size: 1.2em; }
   .card .link-icon i {
     margin-top: 7px; }
   .card .bottom-button {
@@ -7847,6 +7845,15 @@ body {
       font-weight: bold;
       color: #666;
       text-decoration: underline; }
+
+.person_banner button.person_edit {
+  float: right; }
+  .person_banner button.person_edit a:link, .person_banner button.person_edit a:visited {
+    color: white; }
+.person_banner img.person_photo {
+  height: 120px;
+  float: left;
+  margin-right: 20px; }
 
 .mentions_list .mention_item {
   margin-bottom: 3em; }
