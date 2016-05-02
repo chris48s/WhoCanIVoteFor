@@ -46,14 +46,14 @@ class Election(models.Model):
 
         if delta.days < 0:
             if delta.days > -5:
-                return "{} days ago ({})".format(delta.days, self.election_date.strftime("%A %-d %B %Y"))
+                return "{} days ago".format(delta.days)
             else:
-                return "on {}".format(self.election_date)
+                return "on {}".format(self.election_date.strftime("%A %-d %B %Y"))
         else:
             if delta.days < 7:
-                return "in {} days ({})".format(delta.days, self.election_date.strftime("%A %-d %B %Y"))
+                return "in {} days".format(delta.days)
             else:
-                return "on {}".format(self.election_date)
+                return "on {}".format(self.election_date.strftime("%A %-d %B %Y"))
 
 
     @property
