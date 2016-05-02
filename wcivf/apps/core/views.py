@@ -10,6 +10,9 @@ from .forms import PostcodeLookupForm
 class PostcodeFormView(FormView):
     form_class = PostcodeLookupForm
 
+    def get_form_kwargs(self):
+        return {'autofocus': True}
+
     def form_valid(self, form):
         postcode = form.cleaned_data['postcode']
         self.success_url = reverse(
