@@ -15,9 +15,9 @@
 <h1>{{ object.name }}</h1>
 
 
-
 <p>The {{ object.name }} {% if object.in_past %}was{% else %}will be{% endif %} held on <strong>{{ object.election_date }}</strong>.</p>
 
+{% if object.election_type != "ref" %}
 {% if election.person_set.count %}
   <p>We know about <strong>{{ election.person_set.count }}</strong> candidates
     {% if object.in_past %}that stood{% else %}standing{% endif %} for this election,
@@ -37,6 +37,7 @@
     <li><a href="{{ post.get_absolute_url }}">{{ post.label }}</a></li>
   {% endfor %}
 </ul>
+{% endif %}
 
 </div>
 <script type="application/ld+json">

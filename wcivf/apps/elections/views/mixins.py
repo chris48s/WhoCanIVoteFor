@@ -52,11 +52,14 @@ class PostcodeToPostsMixin(object):
         return datetime.datetime.now().timestamp() < 1466719200
 
     def add_eu(self):
-        election, _ = Election.objects.get_or_create(
+        election, _ = Election.objects.update_or_create(
             slug="ref.2016-06-23",
             election_date="2016-06-23",
             name="Referendum on the UK's membership of the European Union",
             current=True,
+            defaults={
+                'election_type': "ref",
+            }
         )
         if not self.should_add_eu:
             # Don't do anyting if the election is in the past
@@ -64,7 +67,7 @@ class PostcodeToPostsMixin(object):
                 election.current = False
                 election.save()
             return
-        eu_post, _ = Post.objects.get_or_create(
+        eu_post, _ = Post.objects.update_or_create(
             ynr_id="ref.2016-06-23",
             label="EU Referendum",
             role="Referendum on the UK's membership of the European Union",
