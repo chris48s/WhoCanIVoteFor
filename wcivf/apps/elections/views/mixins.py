@@ -1,3 +1,5 @@
+import datetime
+
 import requests
 
 from django.conf import settings
@@ -6,7 +8,7 @@ from django.core.cache import cache
 
 from notifications.forms import PostcodeNotificationForm
 from core.models import LoggedPostcode
-from ..models import Post
+from ..models import Post, Election
 
 
 class ElectionNotificationFormMixin(object):
@@ -45,6 +47,35 @@ class ElectionNotificationFormMixin(object):
 
 
 class PostcodeToPostsMixin(object):
+    @property
+    def should_add_eu(self):
+        return datetime.datetime.now().timestamp() < 1466719200
+
+    def add_eu(self):
+        election, _ = Election.objects.get_or_create(
+            slug="ref.2016-06-23",
+            election_date="2016-06-23",
+            name="Referendum on the UK's membership of the European Union",
+            current=True,
+        )
+        if not self.should_add_eu:
+            # Don't do anyting if the election is in the past
+            if election.current:
+                election.current = False
+                election.save()
+            return
+        eu_post, _ = Post.objects.get_or_create(
+            ynr_id="ref.2016-06-23",
+            label="EU Referendum",
+            role="Referendum on the UK's membership of the European Union",
+            group="UK",
+            organization="UK Government",
+            area_name="UK",
+            area_id="GB",
+            election=election
+        )
+        return eu_post.ynr_id
+
     def postcode_to_posts(self, postcode):
         key = "upcoming_elections_{}".format(postcode)
         results_json = cache.get(key)
@@ -60,6 +91,11 @@ class PostcodeToPostsMixin(object):
         all_posts = []
         for election in results_json:
             all_posts.append(election['post_slug'])
+        if self.should_add_eu:
+            all_posts.append(self.add_eu())
+        print(all_posts)
+
+
 
         posts = Post.objects.filter(ynr_id__in=all_posts)
         posts = posts.select_related('election')

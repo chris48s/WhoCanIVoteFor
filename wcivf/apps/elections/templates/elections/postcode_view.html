@@ -19,26 +19,39 @@
 <section class="columns large-6">
   <div class="card next_election">
     <h2 class="card_header"><span class="postcode">{{ postcode }}</span></h2>
-    <p>
-        {% if posts.count == 0 %}
-            We don't know of any upcoming elections.
-        {% elif posts.count == 1 %}
-            Your next election is {{ posts.0.election.friendly_day }}.
-        {% else %}
+
+    {% if posts.count == 0 %}
+        We don't know of any upcoming elections.
+    {% endif %}
+
+    {% regroup posts by election.election_date as header_elections_by_date %}
+    {% for election_group in header_elections_by_date %}
+        {% if forloop.counter == 1 %}
+          {% if election_group.list.1 %}
             Your next elections are {{ posts.0.election.friendly_day }}.
+          {% else %}
+            Your next election is {{ election_group.list.0.election.friendly_day }}.
+          {% endif %}
         {% endif %}
-    </p>
-    <table>
-      <thead>
-        <tr><td>{{ posts.0.election.election_date|date:"l j F Y" }}</td></tr>
-      </thead>
-      <tbody>
-      {% for post in posts %}
-        <tr><td><a href="#election_{{ post.election.slug }}">{{ post.election }}</a></td></tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    <p>This means you can visit your polling station and fill out <strong>{{ posts.count|apnumber }}</strong> ballot paper{{ posts.count|pluralize }}. You must be registered in order to vote.</p>
+      {#  #}
+      <p>
+      </p>
+      <table>
+        <thead>
+          <tr><td>{{ election_group.list.0.election.election_date|date:"l j F Y" }}</td></tr>
+        </thead>
+        <tbody>
+        {% for post in election_group.list %}
+          <tr><td><a href="#election_{{ post.election.slug }}">{{ post.election }}</a></td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <p>This means you can visit your polling station and fill out
+        <strong>{{ election_group.list|length|apnumber }}</strong> ballot paper{{ election_group.list|length|pluralize }}. You must be registered in order to vote.</p>
+      {#  #}
+      {# {% endfor%} #}
+    {% endfor%}
+
   </div>
 </section>
 

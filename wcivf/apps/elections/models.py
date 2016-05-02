@@ -122,6 +122,8 @@ class Post(models.Model):
 
 
     def friendly_name(self):
+        if self.ynr_id == "ref.2016-06-23":
+            return self.label
         return "{} for {}".format(self.election.for_post_role, self.area_name)
 
 
