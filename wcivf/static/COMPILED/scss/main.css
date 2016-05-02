@@ -7605,6 +7605,8 @@ h1, h2, h3 {
   background: white; }
   .card .card_header {
     font-size: 2em; }
+  .card .card_subheader {
+    font-size: 1.2em; }
   .card .link-icon i {
     margin-top: 7px; }
   .card .bottom-button {
@@ -7645,7 +7647,7 @@ body > header {
       color: black; }
     @media screen and (max-width: 39.9375em) {
       body > header h1 {
-        font-size: 1.9rem; } }
+        font-size: 1.8rem; } }
 
 .footer {
   color: white;
