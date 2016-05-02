@@ -20,7 +20,7 @@
   <div class="clearfix">
     <div class="columns large-12">
     {% if person_posts.all.count %}
-      <p>We know about <strong>{{ object.person_set.count }}</strong> candidates
+      <p>We know about <strong>{{ person_posts.count }}</strong> candidates
       {% if object.election.in_past %}that stood{% else %}standing{% endif %} in this post.</p>
       {% if not object.election.in_past %}
         <p><a href="https://candidates.democracyclub.org.uk">Add more at our candidate crowd-sourcing site</a></p>
