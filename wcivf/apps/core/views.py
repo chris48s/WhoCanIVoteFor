@@ -11,7 +11,9 @@ class PostcodeFormView(FormView):
     form_class = PostcodeLookupForm
 
     def get_form_kwargs(self):
-        return {'autofocus': True}
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'autofocus': True})
+        return kwargs
 
     def form_valid(self, form):
         postcode = form.cleaned_data['postcode']
