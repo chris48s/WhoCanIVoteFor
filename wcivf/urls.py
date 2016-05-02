@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^elections/', include('elections.urls')),
     url(r'^parties/', include('parties.urls')),
     url(r'^person/', include('people.urls')),
+    url(r'^feedback/', include('feedback.urls')),
     url(r'^sitemap\.xml$', cache_page(86400)(sitemap), {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \

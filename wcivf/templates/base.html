@@ -45,7 +45,6 @@
 
 {% block site_footer %}
 
-{% include "feedback/feedback_form.html" %}
 
 </section>
 <footer class="footer">
@@ -81,3 +80,8 @@
 
 </script>
 {% endblock site_footer %}
+
+
+{% block extra_javascript %}
+<script src="{% static "js/main.js" %}?{{ REVISION }}"></script>
+{% endblock extra_javascript %}

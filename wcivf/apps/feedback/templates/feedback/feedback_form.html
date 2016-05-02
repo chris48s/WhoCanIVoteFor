@@ -1,0 +1,57 @@
+<div class="clearfix"></div>
+<section class="row">
+  <div class="columns large-6 large-centered">
+    <div class="card">
+      <form id="feedback_form" method="post" action="{% url 'feedback_form_view' %}">
+        {% csrf_token %}
+        {{ feedback_form.source_url }}
+        <style>
+        #feedback_form ul {
+          margin:0;
+          padding:0;
+        }
+        #feedback_form input[data-toggle] {
+          display: none;
+        }
+
+        #feedback_form input[data-toggle]:checked + label,
+
+        #feedback_form input[data-toggle]:checked + label:active {
+          background-color: salmon;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        #feedback_form .button-group.toggle li:not(first-child) {
+          margin: 0 -0.9rem;
+        }
+
+        </style>
+
+        <div class="row">
+            <div class="columns large-9">
+              <h5>Did you find what you were looking for?</h5>
+            </div>
+            <div class="columns large-3">
+              <ul class="button-group round toggle feedback_buttons" data-toggle="buttons-radio">
+                {% for choice in feedback_form.found_useful %}
+                  {{ choice.tag }}
+                  <label class="button" for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                {% endfor %}
+              </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="columns large-12">
+            <div class="comments_container">
+              <p>Can you tell us anything more?</p>
+              {{ feedback_form.comments }}
+              <button type="submit" class="button">Send feedback</button>
+            </div>
+            </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>
