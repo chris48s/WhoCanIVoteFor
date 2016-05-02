@@ -24,34 +24,32 @@
         We don't know of any upcoming elections.
     {% endif %}
 
-    {% regroup posts by election.election_date as header_elections_by_date %}
-    {% for election_group in header_elections_by_date %}
-        {% if forloop.counter == 1 %}
-          {% if election_group.list.1 %}
-            Your next elections are {{ posts.0.election.friendly_day }}.
-          {% else %}
-            Your next election is {{ election_group.list.0.election.friendly_day }}.
-          {% endif %}
-        {% endif %}
-      {#  #}
+      {% regroup posts by election.election_date as header_elections_by_date %}
       <p>
+      {% if header_elections_by_date.0.list.1 %}
+        Your next elections are
+        {{ header_elections_by_date.0.list.0.election.friendly_day }} ({{ header_elections_by_date.0.list.0.election.election_date|date:"l j F Y" }}).
+      {% else %}
+        Your next election is
+        {{ header_elections_by_date.0.list.0.election.friendly_day }}.
+      {% endif %}
       </p>
       <table>
+        {% for election_group in header_elections_by_date %}
         <thead>
-          <tr><td>{{ election_group.list.0.election.election_date|date:"l j F Y" }}</td></tr>
+          <tr><td>{{ election_group.grouper|date:"l j F Y" }}</td></tr>
         </thead>
         <tbody>
         {% for post in election_group.list %}
           <tr><td><a href="#election_{{ post.election.slug }}">{{ post.election }}</a></td></tr>
         {% endfor %}
         </tbody>
+        {% endfor%}
       </table>
-      <p>This means you can visit your polling station and fill out
-        <strong>{{ election_group.list|length|apnumber }}</strong> ballot paper{{ election_group.list|length|pluralize }}. You must be registered in order to vote.</p>
-      {#  #}
-      {# {% endfor%} #}
-    {% endfor%}
-
+      <p>
+        This means you can visit your polling station {{ header_elections_by_date.0.list.0.election.friendly_day }} and fill out
+        <strong>{{ header_elections_by_date.0.list|length|apnumber }}</strong> ballot paper{{ election_group.list|length|pluralize }}. You must be registered in order to vote.
+      </p>
   </div>
 </section>
 
