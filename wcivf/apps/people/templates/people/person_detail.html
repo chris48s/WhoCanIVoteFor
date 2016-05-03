@@ -16,7 +16,11 @@
   <div class="card">
     <div class="row">
       <div class="columns large-12 person_banner">
-        <button class="button person_edit"><a href="{{ object.get_ynr_url }}">edit details</a></button>
+        <button class="button person_edit">
+          <a href="{{ object.get_ynr_url }}" onclick="trackOutboundLink('candidate:edit-details', '{{ object.get_ynr_url }}'); return false;">
+            edit details
+          </a>
+        </button>
         {% if object.photo %}
         <img src="{% static object.photo.url %}" class="person_photo">
         {% endif %}
@@ -40,7 +44,7 @@
       <dd><a href="mailto:{{ object.email }}">{{ object.email }}</a></dd>
       {% else %}
       We don't know {{ object.name }}'s email address.
-      <a href="https://candidates.democracyclub.org.uk/person/{{ object.ynr_id }}">Can you add it?</a>
+      <a href="{{ object.get_ynr_url }}" onclick="trackOutboundLink('candidate:edit-details', '{{ object.get_ynr_url }}'); return false;">Can you add it?</a>
       {% endif %}
 
         {% if object.twitter_username %}
@@ -48,7 +52,7 @@
           Twitter
         </dt>
         <dd>
-          <a href="https://twitter.com/{{ object.twitter_username }}" title="{{ object.name }}'s Twitter profile">
+          <a href="https://twitter.com/{{ object.twitter_username }}" title="{{ object.name }}'s Twitter profile" onclick="trackOutboundLink('candidate:twitter', '{{ object.twitter_username }}'); return false;">
             @{{ object.twitter_username }}
           </a>
         </dd>
@@ -56,7 +60,7 @@
         {% if object.facebook_page_url %}
         <dt>Facebook</dt>
         <dd>
-          <a href="{{ object.facebook_page_url }}" title="{{ object.name }}'s Facebook profile">
+          <a href="{{ object.facebook_page_url }}" title="{{ object.name }}'s Facebook profile" onclick="trackOutboundLink('candidate:facebook', '{{ object.facebook_page_url }}'); return false;">
             {{ object.facebook_page_url }}
           </a>
         </dd>
@@ -64,7 +68,7 @@
         {% if object.linkedin_url %}
         <dt>LinkedIn</dt>
         <li>
-          <a href="{{ object.linkedin_url }}" title="{{ object.name }}'s LinkedIn profile">
+          <a href="{{ object.linkedin_url }}" title="{{ object.name }}'s LinkedIn profile" onclick="trackOutboundLink('candidate:linkedin', '{{ object.linkedin_url }}'); return false;">
             {{ object.linkedin_url }}
           </a>
         </li>
@@ -72,7 +76,7 @@
         {% if object.homepage_url %}
         <dt>Home Page</dt>
         <dd>
-          <a href="{{ object.homepage_url }}" title="{{ object.name }}'s home page">
+          <a href="{{ object.homepage_url }}" title="{{ object.name }}'s home page" onclick="trackOutboundLink('candidate:homepage', '{{ object.homepage_url }}'); return false;">
             {{ object.homepage_url }}
           </a>
         </dd>
@@ -80,15 +84,23 @@
         {% if object.wikipedia_url %}
         <dt>Wikipedia</dt>
         <dd>
-          <a href="{{ object.wikipedia_url }}" title="{{ object.name }}'s Wikipedia page">
+          <a href="{{ object.wikipedia_url }}" title="{{ object.name }}'s Wikipedia page" onclick="trackOutboundLink('candidate:wikipedia', '{{ object.wikipedia_url }}'); return false;">
             {{ object.wikipedia_url }}
           </a>
         </dd>
         {% endif %}
 
         <dt>Google</dt>
-        <dd><a href='https://www.google.co.uk/search?q="{{object.name}}"+candidate' target="_blank">Search</a></dd>
-        <dd><a href='https://www.google.co.uk/search?q="{{object.name}}"+candidate&tbm=nws' target="_blank">News</a></dd>
+        <dd><a
+              href='https://www.google.co.uk/search?q=%22{{object.name}}%22+candidate'
+              target="_blank"
+              onclick="trackOutboundLink('candidate:google:search', 'https://www.google.co.uk/search?q=%22{{object.name}}%22+candidate'); return false;">
+            Search</a></dd>
+        <dd><a
+            href='https://www.google.co.uk/search?q=%22{{object.name}}%22+candidate&tbm=nws'
+            target="_blank"
+            onclick="trackOutboundLink('candidate:google:news', 'https://www.google.co.uk/search?q=%22{{object.name}}%22+candidate&tbm=nws'); return false;">
+          News</a></dd>
 
     </dl>
   </div>
@@ -107,7 +119,7 @@
         <a href="/admin/profiles/profile/{{ personpost.profile.pk }}/change/" class="button alert tiny">Edit</a>
         {% endif %}
         {{ personpost.profile.text|markdown|urlize }}
-        <a href="{{ personpost.profile.url }}" class="small">source</a>
+        <a href="{{ personpost.profile.url }}" class="small" onclick="trackOutboundLink('candidate:profile', '{{ personpost.profile.url }}'); return false;">source</a>
       {% endif %}
     {% endfor %}
   </div>
