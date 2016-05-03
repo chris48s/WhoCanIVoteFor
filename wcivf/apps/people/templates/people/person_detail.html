@@ -11,6 +11,7 @@
 {% block og_description %}Standing for '{{ object.posts.all.0.label }}' in {{ object.posts.all.0.election.name }}{% endblock og_description %}
 
 {% block content %}
+<div class="row">
 <section class="columns large-12">
   <div class="card">
     <div class="row">
@@ -27,7 +28,9 @@
     </div>
   </div>
 </section>
+</div>
 
+<div class="row">
 <section class="columns large-12">
   <div class="card">
     <h3>Learn more about this candidate</h3>
@@ -85,8 +88,10 @@
     </dl>
   </div>
 </section>
+</div>
 
 {% if object.personpost_set.all.0.profile %}
+<div class="row">
 <section class="columns large-12">
   <div class="card">
     <h3>Personal statement</h3>
@@ -102,9 +107,11 @@
     {% endfor %}
   </div>
 </section>
+</div>
 {% endif %}
 
 
+<div class="row">
 <section class="columns large-12">
   <div class="card">
     <h3>Elections</h3>
@@ -132,10 +139,15 @@
   {% endif %}
 
 </section>
+</div>
 
+<div class="row">
 {% include "elections/includes/_postcode_search_form.html" %}
+</div>
 
+<div class="row">
 {% include "feedback/feedback_form.html" %}
+</div>
 
 {% endblock content %}
 

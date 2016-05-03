@@ -7,6 +7,7 @@
 {% block og_description %}The {{ object.name }} {% if object.in_past %}was{% else %}will be{% endif %} held on {{ object.election_date }}.{% endblock og_description %}
 
 {% block content %}
+<div class="row">
 <section class="columns large-12">
     <div class="card">
         <h1>{{ object.name }}</h1>
@@ -36,6 +37,7 @@
         {% endif %}
     </div>
 </section>
+</div>
 
 <script type="application/ld+json">
 {
@@ -51,9 +53,13 @@
 }
 </script>
 
+<div class="row">
 {% include "elections/includes/_postcode_search_form.html" %}
+</div>
 
+<div class="row">
 {% include "feedback/feedback_form.html" %}
+</div>
 
 {% endblock content %}
 
