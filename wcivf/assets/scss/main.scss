@@ -20,11 +20,7 @@ body {
 
 
 .party_list_row {
-  overflow:scroll;
   clear:right;
-  .party_list_row_inner {
-    width:2000%;
-  }
 }
 // Cards
 .card {
@@ -92,14 +88,18 @@ body {
   float:left;
   position:relative;
 
-//  &.candidate_card_list_candidate {
-//    width:255px;
-//  }
   @include breakpoint(medium down) {
     width:95%;
     height:260px;
+
     &.candidate_card_list_candidate {
-      width:110px;
+        width: 40%;
+    }
+  }
+  
+  @include breakpoint(small down) {
+    &.candidate_card_list_candidate {
+        width: 95%;
     }
   }
 

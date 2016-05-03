@@ -13,7 +13,7 @@
           <div class="columns large-9">
             <h4>{{ person_post.grouper }}</h4>
             <details>
-              <summary>{{ person_post.list|length }} list candidates</summary>
+              <summary>Show {{ person_post.list|length }} list candidates</summary>
               {% for person in person_post.list %}
                 {% include "elections/includes/_person_card.html" with person_post=person lists=True %}
               {% endfor %}

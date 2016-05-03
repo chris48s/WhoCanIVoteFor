@@ -7700,10 +7700,7 @@ body {
   background: #eee; }
 
 .party_list_row {
-  overflow: scroll;
   clear: right; }
-  .party_list_row .party_list_row_inner {
-    width: 2000%; }
 
 .card table thead {
   background: #E6E6E6; }
@@ -7750,7 +7747,10 @@ body {
       width: 95%;
       height: 260px; }
       .candidate_card.candidate_card_list_candidate {
-        width: 110px; } }
+        width: 40%; } }
+  @media screen and (max-width: 39.9375em) {
+    .candidate_card.candidate_card_list_candidate {
+      width: 95%; } }
   .candidate_card header .candidate_info {
     position: absolute;
     top: 1.5em;
