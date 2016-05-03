@@ -9,12 +9,15 @@
 
 
 {% block content %}
+<div class="row">
 <div class="columns large-12">
   <h2 style="margin: 2rem 0 0 0">
     <span class="postcode">{{ postcode }}</span>
   </h2>
 </div>
+</div>
 
+<div class="row">
 <section class="columns large-6">
   <div class="card next_election">
 
@@ -56,12 +59,16 @@
     {% include "notifications/includes/election_notification_form.html" %}
   </div>
 </section>
+</div>
 
+<div class="row">
 {% if polling_station.polling_station_known or polling_station.custom_finder%}
 {# Add this at the top of the page if it's known, or at the bottom if it's not #}
 {% include "elections/includes/_polling_place.html" %}
 {% endif %}
+</div>
 
+<div class="row">
 <section id="elections_list" class="columns large-12">
     {% regroup posts by election.election_date as elections_by_date %}
     {% for election_group in elections_by_date %}
@@ -119,12 +126,16 @@
       {% endfor %}
     {% endfor %}
 </section>
+</div>
+
+<div class="row">
 {% if not polling_station.polling_station_known and not polling_station.custom_finder%}
 {# Add this at the top of the page if it's known, or at the bottom if it's not #}
 {% include "elections/includes/_polling_place.html" %}
 {% endif %}
+</div>
 
-<section>
+<div class="row">
   <div class="columns large-12">
     <div class="card">
       <p>
@@ -133,9 +144,11 @@
       </p>
     </div>
   </div>
-</section>
+</div>
 
+<div class="row">
 {% include "feedback/feedback_form.html" %}
+</div>
 
 {% endblock content %}
 
