@@ -9,13 +9,6 @@
 
 
 {% block content %}
-
-<!--<section class="columns large-12">
-  <div class="card">
-    <h2>Elections in {{ postcode }}</h2>
-  </div>
-</section>-->
-
 <section class="columns large-6">
   <div class="card next_election">
     <h2 class="card_header"><span class="postcode">{{ postcode }}</span></h2>
@@ -65,7 +58,6 @@
 {% endif %}
 
 <section id="elections_list" class="columns large-12">
-  <div class="">
     {% regroup posts by election.election_date as elections_by_date %}
     {% for election_group in elections_by_date %}
     <div class="row">
@@ -121,7 +113,6 @@
       </div>
       {% endfor %}
     {% endfor %}
-  </div>
 </section>
 {% if not polling_station.polling_station_known and not polling_station.custom_finder%}
 {# Add this at the top of the page if it's known, or at the bottom if it's not #}

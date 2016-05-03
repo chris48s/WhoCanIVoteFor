@@ -11,8 +11,6 @@
 
 
 {% block content %}
-
-
 <section class="columns large-12">
   <div class="card">
     <div class="row">
@@ -39,8 +37,6 @@
 
 <section class="columns large-12">
   <div class="card">
-    <div class="row">
-
       {% regroup object.personpost_set.all.counts_by_post by post__election__name as people_by_election %}
 
       {% for election in people_by_election %}
@@ -58,12 +54,8 @@
         </dl>
       {% endfor %}
       {% endfor %}
-    </div>
   </div>
 </section>
-
-
-</div>
 {% endblock content %}
 
 

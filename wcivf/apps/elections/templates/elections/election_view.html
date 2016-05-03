@@ -6,40 +6,37 @@
 {% block og_title %}{{ object.name }}{% endblock og_title %}
 {% block og_description %}The {{ object.name }} {% if object.in_past %}was{% else %}will be{% endif %} held on {{ object.election_date }}.{% endblock og_description %}
 
-
 {% block content %}
+<section class="columns large-12">
+    <div class="card">
+        <h1>{{ object.name }}</h1>
 
-<div class="card">
+        <p>The {{ object.name }} {% if object.in_past %}was{% else %}will be{% endif %} held on <strong>{{ object.election_date }}</strong>.</p>
 
+        {% if object.election_type != "ref" %}
+            {% if election.person_set.count %}
+              <p>We know about <strong>{{ election.person_set.count }}</strong> candidates
+                {% if object.in_past %}that stood{% else %}standing{% endif %} for this election,
+                in <strong>{{ object.post_set.count }}</strong> posts.</p>
+              {% if not object.in_past %}
+                <p><a href="https://candidates.democracyclub.org.uk">Add more at our candidate crowd-sourcing site</a></p>
+              {% endif %}
+              {% else %}
+                {% if not object.in_past %}
+                  <p><a href="https://candidates.democracyclub.org.uk">Add some candidates at our candidate crowd-sourcing site</a></p>
+                {% endif %}
+            {% endif %}
 
-<h1>{{ object.name }}</h1>
+            <h3>Posts</h3>
+            <ul>
+              {% for post in object.post_set.all %}
+                <li><a href="{{ post.get_absolute_url }}">{{ post.label }}</a></li>
+              {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</section>
 
-
-<p>The {{ object.name }} {% if object.in_past %}was{% else %}will be{% endif %} held on <strong>{{ object.election_date }}</strong>.</p>
-
-{% if object.election_type != "ref" %}
-{% if election.person_set.count %}
-  <p>We know about <strong>{{ election.person_set.count }}</strong> candidates
-    {% if object.in_past %}that stood{% else %}standing{% endif %} for this election,
-    in <strong>{{ object.post_set.count }}</strong> posts.</p>
-  {% if not object.in_past %}
-    <p><a href="https://candidates.democracyclub.org.uk">Add more at our candidate crowd-sourcing site</a></p>
-  {% endif %}
-  {% else %}
-    {% if not object.in_past %}
-      <p><a href="https://candidates.democracyclub.org.uk">Add some candidates at our candidate crowd-sourcing site</a></p>
-    {% endif %}
-{% endif %}
-
-<h3>Posts</h3>
-<ul>
-  {% for post in object.post_set.all %}
-    <li><a href="{{ post.get_absolute_url }}">{{ post.label }}</a></li>
-  {% endfor %}
-</ul>
-{% endif %}
-
-</div>
 <script type="application/ld+json">
 {
   "@context": "http://schema.org",
@@ -59,9 +56,6 @@
 {% include "feedback/feedback_form.html" %}
 
 {% endblock content %}
-
-
-
 
 {% block breadcrumbs %}
 <ol vocab="http://schema.org/" typeof="BreadcrumbList" class="breadcrumbs" aria-label="You are here:" role="navigation">

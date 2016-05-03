@@ -1,6 +1,5 @@
 <div class="clearfix"></div>
-<section class="row">
-  <div class="columns large-6 large-centered">
+<section class="columns large-6 large-centered">
     <div class="card">
       <form id="feedback_form" method="post" action="{% url 'feedback_form_view' %}">
         {% csrf_token %}
@@ -53,5 +52,4 @@
 
       </form>
     </div>
-  </div>
 </section>

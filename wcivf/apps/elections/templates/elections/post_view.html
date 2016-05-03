@@ -7,43 +7,40 @@
 {% block og_description %}'{{ object.label }}' is a post in the {{ object.election.name }} election{% endblock og_description %}
 
 {% block content %}
+<section class="columns large-12">
+    <div class="card">
 
-<div class="card">
+      <h1>{{ object.label }}</h1>
 
-  <h1>{{ object.label }}</h1>
+      <p>"{{ object.label }}" is a post in the
+        <a href="{{ object.election.get_absolute_url }}">{{ object.election.name }}</a> election</p>
 
-  <p>"{{ object.label }}" is a post in the
-    <a href="{{ object.election.get_absolute_url }}">{{ object.election.name }}</a> election</p>
-
-
-
-  <div class="clearfix">
-    <div class="columns large-12">
-    {% if person_posts.all.count %}
-      <p>We know about <strong>{{ person_posts.count }}</strong> candidates
-      {% if object.election.in_past %}that stood{% else %}standing{% endif %} in this post.</p>
-      {% if not object.election.in_past %}
-        <p><a href="https://candidates.democracyclub.org.uk">Add more at our candidate crowd-sourcing site</a></p>
-      {% endif %}
+      <div class="clearfix">
+        {% if person_posts.all.count %}
+          <p>We know about <strong>{{ person_posts.count }}</strong> candidates
+          {% if object.election.in_past %}that stood{% else %}standing{% endif %} in this post.</p>
+          {% if not object.election.in_past %}
+            <p><a href="https://candidates.democracyclub.org.uk">Add more at our candidate crowd-sourcing site</a></p>
+          {% endif %}
 
 
-      {% if post.election.uses_lists %}
-        <h3>List candidates by party</h3>
-        <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
-        {% include "elections/includes/_people_list_with_lists.html" with people=person_posts.all %}
-      {% else %}
-        <h3>Candidates</h3>
-        {% include "elections/includes/_people_list.html" with people=person_posts.all %}
-      {% endif %}
-    {% else %}
-      {% if not object.election.in_past %}
-          <p><a href="https://candidates.democracyclub.org.uk">Add some candidates at our candidate crowd-sourcing site</a></p>
-      {% endif %}
-    {% endif %}
+          {% if post.election.uses_lists %}
+            <h3>List candidates by party</h3>
+            <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
+            {% include "elections/includes/_people_list_with_lists.html" with people=person_posts.all %}
+          {% else %}
+            <h3>Candidates</h3>
+            {% include "elections/includes/_people_list.html" with people=person_posts.all %}
+          {% endif %}
+        {% else %}
+          {% if not object.election.in_past %}
+              <p><a href="https://candidates.democracyclub.org.uk">Add some candidates at our candidate crowd-sourcing site</a></p>
+          {% endif %}
+        {% endif %}
+      </div>
+
     </div>
-  </div>
-
-</div>
+</section>
 
 {% if object.mention_set.all %}
 {% include "mentions/includes/_mentions_list.html" with mentions=object.mention_set.all %}
@@ -53,10 +50,7 @@
 
 {% include "feedback/feedback_form.html" %}
 
-
 {% endblock content %}
-
-
 
 
 {% block breadcrumbs %}
