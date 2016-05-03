@@ -9,16 +9,21 @@
 
 
 {% block content %}
+<div class="columns large-12">
+  <h2 style="margin: 2rem 0 0 0">
+    <span class="postcode">{{ postcode }}</span>
+  </h2>
+</div>
+
 <section class="columns large-6">
   <div class="card next_election">
-    <h2 class="card_header"><span class="postcode">{{ postcode }}</span></h2>
 
     {% if posts.count == 0 %}
         We don't know of any upcoming elections.
     {% endif %}
 
       {% regroup posts by election.election_date as header_elections_by_date %}
-      <p>
+      <p style="font-size: 1.4rem;">
       {% if header_elections_by_date.0.list.1 %}
         Your next elections are
         {{ header_elections_by_date.0.list.0.election.friendly_day }} ({{ header_elections_by_date.0.list.0.election.election_date|date:"l j F Y" }}).
@@ -62,7 +67,7 @@
     {% for election_group in elections_by_date %}
     <div class="row">
       <div class="columns large-12">
-      <h2 style="margin: 2rem 0 0 0">{{ election_group.grouper }}</h2>
+        <h2 style="margin: 2rem 0 0 0">{{ election_group.grouper }}</h2>
       </div>
     </div>
       {% for post in election_group.list %}
