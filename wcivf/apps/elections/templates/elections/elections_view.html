@@ -7,14 +7,17 @@
 
 
 {% block content %}
-<h1>All Elections</h1>
-<h2>Current Elections</h2>
-{% include "elections/includes/_election_list.html" with elections=current_elections %}
+<section class="columns large-12">
+  <div class="card">
+    <h1>All Elections</h1>
+    <h2>Current Elections</h2>
+    {% include "elections/includes/_election_list.html" with elections=current_elections %}
 
 
-<h2>Past Elections</h2>
-{% include "elections/includes/_election_list.html" with elections=past_elections %}
-
+    <h2>Past Elections</h2>
+    {% include "elections/includes/_election_list.html" with elections=past_elections %}
+  </div>
+</section>
 {% include "elections/includes/_postcode_search_form.html" %}
 
 {% include "feedback/feedback_form.html" %}

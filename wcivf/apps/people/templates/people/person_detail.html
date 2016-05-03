@@ -30,7 +30,7 @@
 
 <section class="columns large-12">
   <div class="card">
-    <h3>Contact details</h3>
+    <h3>Learn more about this candidate</h3>
     <dl>
       {% if object.email %}
       <dt>Email</dt>
@@ -132,14 +132,10 @@
   {% endif %}
 
 </section>
-<section class="columns">
+
 {% include "elections/includes/_postcode_search_form.html" %}
 
 {% include "feedback/feedback_form.html" %}
-
-</section>
-
-
 
 {% endblock content %}
 

@@ -20,13 +20,10 @@ body {
 
 
 .party_list_row {
-  overflow:scroll;
   clear:right;
-  .party_list_row_inner {
-    width:2000%;
-  }
 }
-// Cards
+
+/* Cards */
 .card {
     table {
         thead {
