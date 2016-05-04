@@ -17,7 +17,9 @@
     <form method=post>
       {% csrf_token %}
       {{ form }}
+      {% if request.GET.invalid_postcode %}
       <p><strong>Sorry, we don't know the postcode {{ request.GET.postcode }}.  Is there another one you can try?</strong></p>
+      {% endif %}
       <button type="submit" class="button">Search</button>
     </form>
   </div>
