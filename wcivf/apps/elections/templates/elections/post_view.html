@@ -44,11 +44,11 @@
   </section>
 </div>
 
-{% if object.mention_set.all %}
-<div class="row">
-{% include "mentions/includes/_mentions_list.html" with mentions=object.mention_set.all %}
-</div>
-{% endif %}
+{# {% if object.mention_set.all %} #}
+{# <div class="row"> #}
+{# {% include "mentions/includes/_mentions_list.html" with mentions=object.mention_set.all %} #}
+{# </div> #}
+{# {% endif %} #}
 
 <div class="row">
 {% include "elections/includes/_postcode_search_form.html" %}
