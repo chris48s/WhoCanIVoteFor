@@ -101,7 +101,7 @@ class PostcodeToPostsMixin(object):
             results_json = req.json()
             cache.set(key, results_json)
 
-        if 'error' in results_json.keys():
+        if type(results_json) == dict and 'error' in results_json.keys():
             raise InvalidPostcodeError(postcode)
         all_posts = []
         for election in results_json:
