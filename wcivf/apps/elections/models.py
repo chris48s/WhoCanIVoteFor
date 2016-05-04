@@ -11,6 +11,10 @@ from .managers import ElectionManager, PostManager
 LOCAL_TZ = pytz.timezone("Europe/London")
 
 
+class InvalidPostcodeError(Exception):
+    pass
+
+
 def utc_to_local(utc_dt):
     return utc_dt.replace(tzinfo=pytz.utc).astimezone(LOCAL_TZ)
 

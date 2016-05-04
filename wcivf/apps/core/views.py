@@ -10,6 +10,12 @@ from .forms import PostcodeLookupForm
 class PostcodeFormView(FormView):
     form_class = PostcodeLookupForm
 
+    def get_initial(self):
+        initial = self.initial.copy()
+        if 'invalid_postcode' in self.request.GET:
+            initial['postcode'] = self.request.GET.get('postcode')
+        return initial
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs.update({'autofocus': True})

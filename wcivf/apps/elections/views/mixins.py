@@ -8,7 +8,7 @@ from django.core.cache import cache
 
 from notifications.forms import PostcodeNotificationForm
 from core.models import LoggedPostcode
-from ..models import Post, Election
+from ..models import Post, Election, InvalidPostcodeError
 
 
 class ElectionNotificationFormMixin(object):
@@ -47,6 +47,16 @@ class ElectionNotificationFormMixin(object):
 
 
 class PostcodeToPostsMixin(object):
+    def get(self, request, *args, **kwargs):
+        try:
+            context = self.get_context_data(**kwargs)
+        except InvalidPostcodeError:
+            return HttpResponseRedirect(
+                '/?invalid_postcode=1&postcode={}'.format(
+                    self.postcode
+                ))
+        return self.render_to_response(context)
+
     @property
     def should_add_eu(self):
         return datetime.datetime.now().timestamp() < 1466719200
@@ -91,6 +101,8 @@ class PostcodeToPostsMixin(object):
             results_json = req.json()
             cache.set(key, results_json)
 
+        if 'error' in results_json.keys():
+            raise InvalidPostcodeError(postcode)
         all_posts = []
         for election in results_json:
             all_posts.append(election['post_slug'])

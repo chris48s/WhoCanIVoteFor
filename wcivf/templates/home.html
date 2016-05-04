@@ -17,6 +17,7 @@
     <form method=post>
       {% csrf_token %}
       {{ form }}
+      <p><strong>Sorry, we don't know the postcode {{ request.GET.postcode }}.  Is there another one you can try?</strong></p>
       <button type="submit" class="button">Search</button>
     </form>
   </div>

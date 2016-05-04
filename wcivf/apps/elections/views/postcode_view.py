@@ -56,7 +56,8 @@ class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['postcode'] = self.clean_postcode(kwargs['postcode'])
+        self.postcode = self.clean_postcode(kwargs['postcode'])
+        context['postcode'] = self.postcode
         self.log_postcode(context['postcode'])
         context['posts'] = self.postcode_to_posts(context['postcode'])
         context['people_for_post'] = {}
