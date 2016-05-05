@@ -51,7 +51,7 @@ class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
     def clean_postcode(self, postcode):
         incode_pattern = '[0-9][ABD-HJLNP-UW-Z]{2}'
         space_regex = re.compile(r' *(%s)$' % incode_pattern)
-        postcode = space_regex.sub(r' \1', postcode)
+        postcode = space_regex.sub(r' \1', postcode.upper())
         return postcode
 
     def get_context_data(self, **kwargs):
