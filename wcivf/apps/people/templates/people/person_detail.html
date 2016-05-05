@@ -67,11 +67,11 @@
         {% endif %}
         {% if object.linkedin_url %}
         <dt>LinkedIn</dt>
-        <li>
+        <dd>
           <a href="{{ object.linkedin_url }}" title="{{ object.name }}'s LinkedIn profile" onclick="trackOutboundLink('candidate:linkedin', '{{ object.linkedin_url }}'); return false;">
             {{ object.linkedin_url }}
           </a>
-        </li>
+        </dd>
         {% endif %}
         {% if object.homepage_url %}
         <dt>Home Page</dt>
