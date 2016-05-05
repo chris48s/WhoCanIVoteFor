@@ -51,7 +51,7 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
       </table>
       <p>
         This means you can visit your polling station {{ header_elections_by_date.0.list.0.election.friendly_day }} and fill out
-        <strong>{{ header_elections_by_date.0.list|length|apnumber }}</strong> ballot paper{{ election_group.list|length|pluralize }}. You must be registered in order to vote.
+        <strong>{{ header_elections_by_date.0.list|length|apnumber }}</strong> ballot paper{{ header_elections_by_date.0.list|length|pluralize }}. You must be registered in order to vote.
       </p>
   </div>
 </section>
