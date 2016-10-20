@@ -64,12 +64,12 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
 </section>
 </div>
 
-<div class="row">
-{% if polling_station.polling_station_known or polling_station.custom_finder%}
-{# Add this at the top of the page if it's known, or at the bottom if it's not #}
-{% include "elections/includes/_polling_place.html" %}
-{% endif %}
-</div>
+{# <div class="row"> #}
+{# {% if polling_station.polling_station_known or polling_station.custom_finder%} #}
+{# {# Add this at the top of the page if it's known, or at the bottom if it's not #}
+{# {% include "elections/includes/_polling_place.html" %} #}
+{# {% endif %} #}
+{# </div> #}
 
 <div class="row">
 <section id="elections_list" class="columns large-12">
