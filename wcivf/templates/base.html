@@ -32,6 +32,16 @@
     <link rel="stylesheet" href="{% static "scss/main.scss"|compile %}?{{ REVISION }}" />{% endif %}
 {% endblock extra_site_css %}
 
+{% block top_banner %}
+<div class="callout warning">
+    <div class="columns large-6 large-centered">
+      <h5>Archived site</h5>
+      <p>This site contains information about the elections in May 2016. We will be updating the site in time for May 2017.</p>
+      <a href="https://candidates.democracyclub.org.uk/">Keep an eye on our candidates web site</a> or <a href="https://democracyclub.org.uk/blog/">follow our blog for news on what we're up to.</a>
+    </div>
+</div>
+{% endblock top_banner %}
+
 {% block bottom_banner %}
 <div id="bottom_banner">
   <div class="row">
