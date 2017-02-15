@@ -27,8 +27,12 @@
             {% else %}
             <p>You should get a "poll card" through the post telling you where to vote.</p>
               <p>If you haven't got one, or aren't sure where to vote, you should call
+              {% if polling_station.council %}
                 {{ polling_station.council.name }} on <a href="tel:{{ polling_station.council.phone }}">
                   {{ polling_station.council.phone }}</a></p>
+              {% else %}
+                your local council.</p>
+              {% endif %}
             {% endif %}
         {% endif %}
 
