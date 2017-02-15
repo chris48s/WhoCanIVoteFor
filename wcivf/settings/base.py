@@ -162,6 +162,10 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
 YNR_BASE = "https://candidates.democracyclub.org.uk"
+
+WDIV_BASE = "https://wheredoivote.co.uk"
+WDIV_API = "/api/beta"
+
 CANONICAL_URL = "https://whocanivotefor.co.uk"
 
 SITE_TITLE = "Who Can I Vote For?"

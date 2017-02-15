@@ -130,8 +130,8 @@ class PollingStationInfoMixin(object):
             return info
 
         info = {}
-        base_url = "http://pollingstations.democracyclub.org.uk"
-        url = "{base_url}/api/postcode/{postcode}/".format(
+        base_url = settings.WDIV_BASE + settings.WDIV_API
+        url = "{base_url}/postcode/{postcode}.json".format(
             base_url=base_url,
             postcode=postcode
         )
