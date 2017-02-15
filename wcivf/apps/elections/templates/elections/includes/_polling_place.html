@@ -10,7 +10,7 @@
 
         <h2>Where to vote</h2>
         {% if polling_station.polling_station_known %}
-        <p>Your polling station is <strong>{{ polling_station.polling_station.address }}</strong></p>
+        <p>Your polling station is <strong>{{ polling_station.polling_station.properties.address }}</strong></p>
         <p><a href="http://pollingstations.democracyclub.org.uk/postcode/{{ postcode }}">
           Get walking directions from {{ postcode }}</a></p>
         {% else %}
@@ -78,8 +78,8 @@
       };
 
       var polling_station_point = [
-        {{ polling_station.polling_station.location.latitude }},
-        {{ polling_station.polling_station.location.longitude }}
+        {{ polling_station.polling_station.geometry.coordinates.1 }},
+        {{ polling_station.polling_station.geometry.coordinates.0 }}
       ];
 
       create_area_map(polling_station_point);
