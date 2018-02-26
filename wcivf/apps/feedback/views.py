@@ -25,8 +25,6 @@ class FeedbackFormView(UpdateView):
 
     def get_success_url(self):
 
-        feedback_object = self.object
-
         messages.success(
             self.request,
             render_to_string(
