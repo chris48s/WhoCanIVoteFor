@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.views.generic import View, UpdateView
 from django.utils.http import is_safe_url
 from django.contrib import messages
@@ -6,8 +6,6 @@ from django.template.loader import render_to_string
 
 from .forms import FeedbackForm
 from .models import Feedback
-from donations.forms import DonationForm
-from donations.helpers import GoCardlessHelper
 
 
 class FeedbackFormView(UpdateView):

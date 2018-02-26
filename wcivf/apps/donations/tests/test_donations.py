@@ -10,5 +10,5 @@ def test_donation_middleware_form_valid(db, client):
         'donation_form-payment_type': 'subscription',
     }
     req = client.post('/donate/', form_data)
-    assert req.url == "https://pay-sandbox.gocardless.com/flow/RE0000PV77M4SN1QWF1F30SP8PXQHAWC"  # noqa
+    assert req.url == "https://pay-sandbox.gocardless.com/flow/RE0000WH5ETXVTJE5BKT7BS28NNNG8WQ"  # noqa
     assert req.status_code == 302
