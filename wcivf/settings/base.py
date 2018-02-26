@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'robots',
     'api',
     'results',
+    'donations',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -69,6 +70,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'core.middleware.UTMTrackerMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'donations.middleware.DonationFormMiddleware',
 )
 
 ROOT_URLCONF = 'wcivf.urls'
@@ -207,8 +209,9 @@ REST_FRAMEWORK = {
 }
 
 GO_CARDLESS_PAYMENT_NAME = "Democracy Club Donation"
-GO_CARDLESS_PAYMENT_DESCRIPTION = "Helping Democracy Club increase the quantity,"\
-" quality and accessibility of information on election candidates, politicians and democratic processes"
+GO_CARDLESS_PAYMENT_DESCRIPTION = "Helping Democracy Club "\
+"increase the quality of information on elections & the democratic processes"
+
 GOCARDLESS_REDIRECT_URL = "https://democracyclub.org.uk/donate/thanks/"
 
 

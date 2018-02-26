@@ -29,6 +29,7 @@ urlpatterns = [
         name='django.contrib.sitemaps.views.sitemap'),
     url(r'^robots\.txt', include('robots.urls')),
     url(r'^email/', include('dc_signup_form.urls')),
+    url(r'^donate/', include('donations.urls', namespace="donations")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

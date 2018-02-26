@@ -22,7 +22,7 @@
 
 <form method="post" class="donate_form inline_radios" action="{% url "feedback_form_view" %}">
   {% csrf_token %}
-  {{ donate_form.errors }}
-  {{ donate_form|dc_form }}
+  {{ request.donation_form.errors }}
+  {{ request.donation_form|dc_form }}
   <button type="submit" class="buttonNew">Next</button>
 </form>

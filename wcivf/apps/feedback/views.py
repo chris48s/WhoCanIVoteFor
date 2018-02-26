@@ -15,17 +15,6 @@ class FeedbackFormView(UpdateView):
     template_name = "feedback/feedback_form_view.html"
     donate_form_prefix = "donation_form"
 
-    def post(self, request, *args, **kwargs):
-
-        key_to_check = "{}-amount".format(self.donate_form_prefix)
-        if key_to_check in request.POST:
-            form = DonationForm(
-                data=request.POST, prefix=self.donate_form_prefix)
-            if form.is_valid():
-                gc = GoCardlessHelper()
-                url = gc.get_payment_url(**form.cleaned_data)
-                return HttpResponseRedirect(url)
-        return super(FeedbackFormView, self).post(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
         token = self.request.POST.get('token')
@@ -37,22 +26,11 @@ class FeedbackFormView(UpdateView):
     def get_success_url(self):
 
         feedback_object = self.object
-        context = {
-            'object': feedback_object,
-            'donate_form': DonationForm(
-                initial={
-                    'payment_type': 'subscription',
-                    'amount': 3,
-                },
-                prefix="donation_form"
-            )
-        }
 
         messages.success(
             self.request,
             render_to_string(
                 'feedback/feedback_thanks.html',
-                context,
                 request=self.request
             ),
             extra_tags='template',
