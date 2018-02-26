@@ -6,3 +6,6 @@ CACHES = {
         "BACKEND": "django.core.cache.backends.dummy.DummyCache",
     }
 }
+
+GOCARDLESS_USE_SANDBOX = True
+GOCARDLESS_ACCESS_TOKEN = "Made Up"
